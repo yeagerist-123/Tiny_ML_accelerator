@@ -25,4 +25,5 @@ module controller_fsm (
             end
         end
     end
+
 endmodule
