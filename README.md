@@ -10,19 +10,20 @@
     *   [Weight & Activation Buffering](#3-weight-and-activation-buffering)
     *   [Control FSM](#4-simple-control-fsm-the-brain)
 5.  [📂 Modular Hierarchy (RTL Files)](#-modular-hierarchy--rtl-files)
-6.  [🚀 Replication Guide (RTL-to-GDS)](#-replication-guide-rtl-to-sign-off-flow)
+6.  [🚀 Replication Guide (ip execution)](#-replication-guide-execution-of-our-ip-flow)
     *   [Functional Simulation](#step-2-functional-simulation)
     *   [Output Verification (281e140a)](#-understanding-the-output-281e140a)
     *   [Logic Synthesis](#step-3-logic-synthesis-with-yosys)
     *   [Static Timing Analysis (STA)](#step-4-static-timing-analysis-sta)
 7.  [📊 Synthesis Results & Performance Benchmarking](#-synthesis-results--performance-benchmarking)
-8.  [🛤️ Roadmap: Performance Strategy](#-roadmap-high-performance-hardware-implementation-strategy)
+8.  [📋 Top-Module Register File Map (Control & I/O)](#-top-module-register-file-map-control--io)
+9.  [🛤️ Roadmap: Performance Strategy](#-roadmap-high-performance-hardware-implementation-strategy)
     *   [MobileNet-style Depthwise Separable Convolutions](#1-mobilenet-style-depthwise-separable-convolutions)
     *   [Burst-Based Memory Interface](#2-burst-based-memory-interface)
     *   [Layer Fusion Optimization](#3-layer-fusion-optimization)
     *   [Power-Aware Scheduling](#4-power-aware-scheduling)
     *   [5. Multi-Layer Pipeline Acceleration](#5-multi-layer-pipeline-acceleration)
-9.  [ 🏁 Conclusion & Next Steps](#-conclusion--next-steps)
+10.  [ 🏁 Conclusion & Next Steps](#-conclusion--next-steps)
     
 
 
@@ -267,7 +268,7 @@ This is the **Top-Level Module** that encapsulates the entire IP core.
 | `controller_fsm.v` | Control | Timing, State Logic, & Synchronization |
 | `top_tinyml.v` | Integration | Top-level SoC Interface & Routing |
 
-# 🚀 Replication Guide: RTL-to-Sign-off Flow
+# 🚀 Replication Guide: execution of our ip Flow
 
 This guide provides the necessary system requirements and step-by-step commands to replicate the synthesis and verification of the TinyML Accelerator using the **SkyWater 130nm PDK**.
 
@@ -409,6 +410,27 @@ sta scripts/run_sta.tcl | tee docs/timing_report.txt
 ```
 
 <img width="1205" height="709" alt="sta analysis" src="https://github.com/user-attachments/assets/a5b57627-0b75-496e-b1fb-e61695f29afc" />
+
+## 📋 Top-Module Register File Map (Control & I/O)
+
+To allow an external SoC or CPU to interface with the **ConvNet Core**, the top-level module implements a series of **Memory-Mapped Registers (MMR)**. These registers provide a standardized software interface for triggering operations, monitoring hardware status, and retrieving inference results.
+
+| Register Name | Address (Offset) | Width | Access | Functional Mapping |
+| :--- | :--- | :--- | :--- | :--- |
+| **`REG_CTRL`** | `0x00` | 8-bit | R/W | **Bit 0:** Start (Trigger Compute)<br>**Bit 1:** Reset (Clear Pipeline)<br>**Bit 2:** Interrupt Enable |
+| **`REG_STATUS`** | `0x04` | 8-bit | RO | **Bit 0:** Busy (PEs Active)<br>**Bit 1:** Done (Result Valid)<br>**Bit 2:** Error (Arithmetic Overflow) |
+| **`REG_W_ADDR`** | `0x08` | 16-bit | R/W | Base address pointer for the **Weight Buffer** in SRAM. |
+| **`REG_A_ADDR`** | `0x0C` | 16-bit | R/W | Base address pointer for the **Activation Buffer** (IFMs). |
+| **`REG_OUT_DATA`** | `0x10` | 32-bit | RO | **Result Register:** Captures concatenated INT8 values (e.g., `0x281e140a`). |
+
+---
+
+### 🔍 Strategic Importance of the Register Map
+
+* **Software-Hardware Co-Design:** This map allows a C/C++ driver to control the hardware by simply writing to specific memory addresses. It transforms a "Verilog module" into a "Programmable IP."
+* **Energy-Efficient Orchestration:** The `REG_STATUS` bits allow the CPU to enter a low-power sleep state while the accelerator is "Busy," waking only when the "Done" interrupt is triggered.
+* **Deterministic Output Capture:** `REG_OUT_DATA` acts as a shadow register. It captures the four staggered 8-bit results from the systolic array and holds them as a single 32-bit word, reducing the number of I/O cycles required by the external bus.
+* **Dynamic Reconfigurability:** By updating `REG_W_ADDR` and `REG_A_ADDR`, the accelerator can be repurposed for different layers of a neural network without any hardware changes.
 
 
 ## 📊 Synthesis Results & Performance Benchmarking
