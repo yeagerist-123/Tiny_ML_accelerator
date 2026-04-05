@@ -1,7 +1,7 @@
 # 🧠 TinyML Hardware Accelerator (Track A)
 # IP Documentation: Tiny ML Accelerator
 ## 📌 Table of Contents
-1.  [📖 Overview](#-overview)
+1.  [📖 Overview](#overview)
 2.  [📂 Repository Structure](#-repository-structure)
 3.  [🌟 Strategic Importance](#-the-strategic-importance-of-our-design)
 4.  [🛠️ MVP Requirements & Engineering](#️-mvp-requirements-implementation--engineering-importance)
@@ -10,18 +10,18 @@
     *   [Weight & Activation Buffering](#3-weight-and-activation-buffering)
     *   [Control FSM](#4-simple-control-fsm-the-brain)
 5.  [📂 Modular Hierarchy (RTL Files)](#-modular-hierarchy--rtl-files)
-6.  [📊 Synthesis Results & Performance Benchmarking](#-synthesis-results-&-performance-benchmarking)
-7.  [🚀 Replication Guide (RTL-to-GDS)](#-replication-guide-rtl-to-sign-off-flow)
+6.  [🚀 Replication Guide (RTL-to-GDS)](#-replication-guide-rtl-to-sign-off-flow)
     *   [Functional Simulation](#step-2-functional-simulation)
     *   [Output Verification (281e140a)](#-understanding-the-output-281e140a)
     *   [Logic Synthesis](#step-3-logic-synthesis-with-yosys)
     *   [Static Timing Analysis (STA)](#step-4-static-timing-analysis-sta)
+7.  [📊 Synthesis Results & Performance Benchmarking](#-synthesis-results--performance-benchmarking)
 8.  [🛤️ Roadmap: Performance Strategy](#-roadmap-high-performance-hardware-implementation-strategy)
-    *   [MobileNet-style Depthwise Separable Convolutions](#-mobilenet-style-depthwise-separable-convolutions)
-    *   [Burst-Based Memory Interface](#-burst-based-memory-interface)
-    *   [Layer Fusion Optimization](#-layer-fusion-optimization)
-    *   [Power-Aware Scheduling](#-power-aware-scheduling)
-    *   [5. Multi-Layer Pipeline Acceleration](#-multi-layer-pipeline-acceleration)
+    *   [MobileNet-style Depthwise Separable Convolutions](#1-mobilenet-style-depthwise-separable-convolutions)
+    *   [Burst-Based Memory Interface](#2-burst-based-memory-interface)
+    *   [Layer Fusion Optimization](#3-layer-fusion-optimization)
+    *   [Power-Aware Scheduling](#4-power-aware-scheduling)
+    *   [5. Multi-Layer Pipeline Acceleration](#5-multi-layer-pipeline-acceleration)
     
 
 
