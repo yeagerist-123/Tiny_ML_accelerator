@@ -1,0 +1,3249 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.58 (git sha1 157aabb58, g++ 11.4.0-1ubuntu1~22.04.2 -fPIC -O3)
+
+-- Executing script file `scripts/synth.tcl' --
+
+1. Executing Verilog-2005 frontend: rtl/compute/systolic_array.v
+Parsing Verilog input from `rtl/compute/systolic_array.v' to AST representation.
+verilog frontend filename rtl/compute/systolic_array.v
+Generating RTLIL representation for module `\systolic_array'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/compute/relu.v
+Parsing Verilog input from `rtl/compute/relu.v' to AST representation.
+verilog frontend filename rtl/compute/relu.v
+Generating RTLIL representation for module `\relu'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/memory/weight_buffer.v
+Parsing Verilog input from `rtl/memory/weight_buffer.v' to AST representation.
+verilog frontend filename rtl/memory/weight_buffer.v
+Generating RTLIL representation for module `\weight_buffer'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: rtl/memory/activation_buffer.v
+Parsing Verilog input from `rtl/memory/activation_buffer.v' to AST representation.
+verilog frontend filename rtl/memory/activation_buffer.v
+Generating RTLIL representation for module `\activation_buffer'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: rtl/control/controller_fsm.v
+Parsing Verilog input from `rtl/control/controller_fsm.v' to AST representation.
+verilog frontend filename rtl/control/controller_fsm.v
+Generating RTLIL representation for module `\controller_fsm'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: rtl/top/top_tinyml.v
+Parsing Verilog input from `rtl/top/top_tinyml.v' to AST representation.
+verilog frontend filename rtl/top/top_tinyml.v
+Generating RTLIL representation for module `\top_tinyml'.
+Successfully finished Verilog frontend.
+
+7. Executing HIERARCHY pass (managing design hierarchy).
+
+7.1. Analyzing design hierarchy..
+Top module:  \top_tinyml
+Used module:     \relu
+Used module:     \systolic_array
+Used module:     \activation_buffer
+Used module:     \weight_buffer
+Used module:     \controller_fsm
+
+7.2. Analyzing design hierarchy..
+Top module:  \top_tinyml
+Used module:     \relu
+Used module:     \systolic_array
+Used module:     \activation_buffer
+Used module:     \weight_buffer
+Used module:     \controller_fsm
+Removed 0 unused modules.
+
+8. Executing SYNTH pass.
+
+8.1. Executing HIERARCHY pass (managing design hierarchy).
+
+8.1.1. Analyzing design hierarchy..
+Top module:  \top_tinyml
+Used module:     \relu
+Used module:     \systolic_array
+Used module:     \activation_buffer
+Used module:     \weight_buffer
+Used module:     \controller_fsm
+
+8.1.2. Analyzing design hierarchy..
+Top module:  \top_tinyml
+Used module:     \relu
+Used module:     \systolic_array
+Used module:     \activation_buffer
+Used module:     \weight_buffer
+Used module:     \controller_fsm
+Removed 0 unused modules.
+
+8.2. Executing PROC pass (convert processes to netlists).
+
+8.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+8.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 3 switch rules as full_case in process $proc$rtl/control/controller_fsm.v:9$139 in module controller_fsm.
+Marked 2 switch rules as full_case in process $proc$rtl/memory/activation_buffer.v:12$116 in module activation_buffer.
+Marked 2 switch rules as full_case in process $proc$rtl/memory/weight_buffer.v:11$52 in module weight_buffer.
+Removed a total of 0 dead cases.
+
+8.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 2 redundant assignments.
+Promoted 45 assignments to connections.
+
+8.2.4. Executing PROC_INIT pass (extract init attributes).
+
+8.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+8.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~7 debug messages>
+
+8.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\controller_fsm.$proc$rtl/control/controller_fsm.v:9$139'.
+     1/3: $0\done[0:0]
+     2/3: $0\load_weights[0:0]
+     3/3: $0\count[4:0]
+Creating decoders for process `\activation_buffer.$proc$rtl/memory/activation_buffer.v:23$134'.
+Creating decoders for process `\activation_buffer.$proc$rtl/memory/activation_buffer.v:12$116'.
+     1/10: $2$memwr$\mem$rtl/memory/activation_buffer.v:19$115_EN[7:0]$133
+     2/10: $2$memwr$\mem$rtl/memory/activation_buffer.v:19$115_DATA[7:0]$132
+     3/10: $2$memwr$\mem$rtl/memory/activation_buffer.v:19$115_ADDR[1:0]$131
+     4/10: $1$memwr$\mem$rtl/memory/activation_buffer.v:17$114_EN[7:0]$127
+     5/10: $1$memwr$\mem$rtl/memory/activation_buffer.v:16$113_EN[7:0]$126
+     6/10: $1$memwr$\mem$rtl/memory/activation_buffer.v:15$112_EN[7:0]$125
+     7/10: $1$memwr$\mem$rtl/memory/activation_buffer.v:14$111_EN[7:0]$124
+     8/10: $1$memwr$\mem$rtl/memory/activation_buffer.v:19$115_EN[7:0]$130
+     9/10: $1$memwr$\mem$rtl/memory/activation_buffer.v:19$115_DATA[7:0]$129
+    10/10: $1$memwr$\mem$rtl/memory/activation_buffer.v:19$115_ADDR[1:0]$128
+Creating decoders for process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:22$94'.
+Creating decoders for process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+     1/23: $2$memwr$\mem$rtl/memory/weight_buffer.v:17$51_EN[7:0]$93
+     2/23: $2$memwr$\mem$rtl/memory/weight_buffer.v:17$51_DATA[7:0]$92
+     3/23: $2$memwr$\mem$rtl/memory/weight_buffer.v:17$51_ADDR[3:0]$91
+     4/23: $1\i[31:0]
+     5/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$50_EN[7:0]$87
+     6/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$49_EN[7:0]$86
+     7/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$48_EN[7:0]$85
+     8/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$47_EN[7:0]$84
+     9/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$46_EN[7:0]$83
+    10/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$45_EN[7:0]$82
+    11/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$44_EN[7:0]$81
+    12/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$43_EN[7:0]$80
+    13/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$42_EN[7:0]$79
+    14/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$41_EN[7:0]$78
+    15/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$40_EN[7:0]$77
+    16/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$39_EN[7:0]$76
+    17/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$38_EN[7:0]$75
+    18/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$37_EN[7:0]$74
+    19/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$36_EN[7:0]$73
+    20/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:14$35_EN[7:0]$72
+    21/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:17$51_EN[7:0]$90
+    22/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:17$51_DATA[7:0]$89
+    23/23: $1$memwr$\mem$rtl/memory/weight_buffer.v:17$51_ADDR[3:0]$88
+
+8.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\activation_buffer.\act_bus' from process `\activation_buffer.$proc$rtl/memory/activation_buffer.v:23$134'.
+No latch inferred for signal `\weight_buffer.\weight_bus' from process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:22$94'.
+No latch inferred for signal `\weight_buffer.\k' from process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:22$94'.
+
+8.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\controller_fsm.\load_weights' using process `\controller_fsm.$proc$rtl/control/controller_fsm.v:9$139'.
+  created $dff cell `$procdff$283' with positive edge clock.
+Creating register for signal `\controller_fsm.\done' using process `\controller_fsm.$proc$rtl/control/controller_fsm.v:9$139'.
+  created $dff cell `$procdff$284' with positive edge clock.
+Creating register for signal `\controller_fsm.\count' using process `\controller_fsm.$proc$rtl/control/controller_fsm.v:9$139'.
+  created $dff cell `$procdff$285' with positive edge clock.
+Creating register for signal `\activation_buffer.$memwr$\mem$rtl/memory/activation_buffer.v:14$111_EN' using process `\activation_buffer.$proc$rtl/memory/activation_buffer.v:12$116'.
+  created $dff cell `$procdff$286' with positive edge clock.
+Creating register for signal `\activation_buffer.$memwr$\mem$rtl/memory/activation_buffer.v:15$112_EN' using process `\activation_buffer.$proc$rtl/memory/activation_buffer.v:12$116'.
+  created $dff cell `$procdff$287' with positive edge clock.
+Creating register for signal `\activation_buffer.$memwr$\mem$rtl/memory/activation_buffer.v:16$113_EN' using process `\activation_buffer.$proc$rtl/memory/activation_buffer.v:12$116'.
+  created $dff cell `$procdff$288' with positive edge clock.
+Creating register for signal `\activation_buffer.$memwr$\mem$rtl/memory/activation_buffer.v:17$114_EN' using process `\activation_buffer.$proc$rtl/memory/activation_buffer.v:12$116'.
+  created $dff cell `$procdff$289' with positive edge clock.
+Creating register for signal `\activation_buffer.$memwr$\mem$rtl/memory/activation_buffer.v:19$115_ADDR' using process `\activation_buffer.$proc$rtl/memory/activation_buffer.v:12$116'.
+  created $dff cell `$procdff$290' with positive edge clock.
+Creating register for signal `\activation_buffer.$memwr$\mem$rtl/memory/activation_buffer.v:19$115_DATA' using process `\activation_buffer.$proc$rtl/memory/activation_buffer.v:12$116'.
+  created $dff cell `$procdff$291' with positive edge clock.
+Creating register for signal `\activation_buffer.$memwr$\mem$rtl/memory/activation_buffer.v:19$115_EN' using process `\activation_buffer.$proc$rtl/memory/activation_buffer.v:12$116'.
+  created $dff cell `$procdff$292' with positive edge clock.
+Creating register for signal `\weight_buffer.\i' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$293' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$35_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$294' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$36_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$295' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$37_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$296' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$38_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$297' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$39_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$298' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$40_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$299' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$41_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$300' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$42_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$301' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$43_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$302' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$44_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$303' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$45_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$304' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$46_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$305' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$47_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$306' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$48_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$307' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$49_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$308' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:14$50_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$309' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:17$51_ADDR' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$310' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:17$51_DATA' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$311' with positive edge clock.
+Creating register for signal `\weight_buffer.$memwr$\mem$rtl/memory/weight_buffer.v:17$51_EN' using process `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+  created $dff cell `$procdff$312' with positive edge clock.
+
+8.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+8.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 3 empty switches in `\controller_fsm.$proc$rtl/control/controller_fsm.v:9$139'.
+Removing empty process `controller_fsm.$proc$rtl/control/controller_fsm.v:9$139'.
+Removing empty process `activation_buffer.$proc$rtl/memory/activation_buffer.v:23$134'.
+Found and cleaned up 2 empty switches in `\activation_buffer.$proc$rtl/memory/activation_buffer.v:12$116'.
+Removing empty process `activation_buffer.$proc$rtl/memory/activation_buffer.v:12$116'.
+Removing empty process `weight_buffer.$proc$rtl/memory/weight_buffer.v:22$94'.
+Found and cleaned up 2 empty switches in `\weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+Removing empty process `weight_buffer.$proc$rtl/memory/weight_buffer.v:11$52'.
+Cleaned up 7 empty switches.
+
+8.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top_tinyml.
+Optimizing module controller_fsm.
+Optimizing module activation_buffer.
+Optimizing module weight_buffer.
+Optimizing module relu.
+Optimizing module systolic_array.
+
+8.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top_tinyml.
+Optimizing module controller_fsm.
+Optimizing module activation_buffer.
+Optimizing module weight_buffer.
+Optimizing module relu.
+Optimizing module systolic_array.
+
+8.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \weight_buffer..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Removed 28 unused cells and 166 unused wires.
+<suppressed ~34 debug messages>
+
+8.5. Executing CHECK pass (checking for obvious problems).
+Checking module activation_buffer...
+Checking module controller_fsm...
+Checking module relu...
+Checking module systolic_array...
+Checking module top_tinyml...
+Checking module weight_buffer...
+Found and reported 0 problems.
+
+8.6. Executing OPT pass (performing simple optimizations).
+
+8.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+8.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+8.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \activation_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$170.
+    dead port 1/2 on $mux $procmux$176.
+    dead port 1/2 on $mux $procmux$182.
+Running muxtree optimizer on module \controller_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \relu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \systolic_array..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_tinyml..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \weight_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$209.
+    dead port 1/2 on $mux $procmux$215.
+    dead port 1/2 on $mux $procmux$221.
+Removed 6 multiplexer ports.
+<suppressed ~78 debug messages>
+
+8.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \activation_buffer.
+    Consolidated identical input bits for $mux cell $procmux$167:
+      Old ports: A=8'00000000, B=8'11111111, Y=$procmux$167_Y
+      New ports: A=1'0, B=1'1, Y=$procmux$167_Y [0]
+      New connections: $procmux$167_Y [7:1] = { $procmux$167_Y [0] $procmux$167_Y [0] $procmux$167_Y [0] $procmux$167_Y [0] $procmux$167_Y [0] $procmux$167_Y [0] $procmux$167_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$185:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/activation_buffer.v:17$114_EN[7:0]$120
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/activation_buffer.v:17$114_EN[7:0]$120 [0]
+      New connections: $0$memwr$\mem$rtl/memory/activation_buffer.v:17$114_EN[7:0]$120 [7:1] = { $0$memwr$\mem$rtl/memory/activation_buffer.v:17$114_EN[7:0]$120 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:17$114_EN[7:0]$120 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:17$114_EN[7:0]$120 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:17$114_EN[7:0]$120 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:17$114_EN[7:0]$120 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:17$114_EN[7:0]$120 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:17$114_EN[7:0]$120 [0] }
+    Consolidated identical input bits for $mux cell $procmux$188:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/activation_buffer.v:16$113_EN[7:0]$119
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/activation_buffer.v:16$113_EN[7:0]$119 [0]
+      New connections: $0$memwr$\mem$rtl/memory/activation_buffer.v:16$113_EN[7:0]$119 [7:1] = { $0$memwr$\mem$rtl/memory/activation_buffer.v:16$113_EN[7:0]$119 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:16$113_EN[7:0]$119 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:16$113_EN[7:0]$119 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:16$113_EN[7:0]$119 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:16$113_EN[7:0]$119 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:16$113_EN[7:0]$119 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:16$113_EN[7:0]$119 [0] }
+    Consolidated identical input bits for $mux cell $procmux$191:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/activation_buffer.v:15$112_EN[7:0]$118
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/activation_buffer.v:15$112_EN[7:0]$118 [0]
+      New connections: $0$memwr$\mem$rtl/memory/activation_buffer.v:15$112_EN[7:0]$118 [7:1] = { $0$memwr$\mem$rtl/memory/activation_buffer.v:15$112_EN[7:0]$118 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:15$112_EN[7:0]$118 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:15$112_EN[7:0]$118 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:15$112_EN[7:0]$118 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:15$112_EN[7:0]$118 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:15$112_EN[7:0]$118 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:15$112_EN[7:0]$118 [0] }
+    Consolidated identical input bits for $mux cell $procmux$194:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/activation_buffer.v:14$111_EN[7:0]$117
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/activation_buffer.v:14$111_EN[7:0]$117 [0]
+      New connections: $0$memwr$\mem$rtl/memory/activation_buffer.v:14$111_EN[7:0]$117 [7:1] = { $0$memwr$\mem$rtl/memory/activation_buffer.v:14$111_EN[7:0]$117 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:14$111_EN[7:0]$117 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:14$111_EN[7:0]$117 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:14$111_EN[7:0]$117 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:14$111_EN[7:0]$117 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:14$111_EN[7:0]$117 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:14$111_EN[7:0]$117 [0] }
+  Optimizing cells in module \activation_buffer.
+    Consolidated identical input bits for $mux cell $procmux$197:
+      Old ports: A=$2$memwr$\mem$rtl/memory/activation_buffer.v:19$115_EN[7:0]$133, B=8'00000000, Y=$0$memwr$\mem$rtl/memory/activation_buffer.v:19$115_EN[7:0]$123
+      New ports: A=$procmux$167_Y [0], B=1'0, Y=$0$memwr$\mem$rtl/memory/activation_buffer.v:19$115_EN[7:0]$123 [0]
+      New connections: $0$memwr$\mem$rtl/memory/activation_buffer.v:19$115_EN[7:0]$123 [7:1] = { $0$memwr$\mem$rtl/memory/activation_buffer.v:19$115_EN[7:0]$123 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:19$115_EN[7:0]$123 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:19$115_EN[7:0]$123 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:19$115_EN[7:0]$123 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:19$115_EN[7:0]$123 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:19$115_EN[7:0]$123 [0] $0$memwr$\mem$rtl/memory/activation_buffer.v:19$115_EN[7:0]$123 [0] }
+  Optimizing cells in module \activation_buffer.
+  Optimizing cells in module \controller_fsm.
+  Optimizing cells in module \relu.
+  Optimizing cells in module \systolic_array.
+  Optimizing cells in module \top_tinyml.
+  Optimizing cells in module \weight_buffer.
+    Consolidated identical input bits for $mux cell $procmux$206:
+      Old ports: A=8'00000000, B=8'11111111, Y=$procmux$206_Y
+      New ports: A=1'0, B=1'1, Y=$procmux$206_Y [0]
+      New connections: $procmux$206_Y [7:1] = { $procmux$206_Y [0] $procmux$206_Y [0] $procmux$206_Y [0] $procmux$206_Y [0] $procmux$206_Y [0] $procmux$206_Y [0] $procmux$206_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$227:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$50_EN[7:0]$68
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$50_EN[7:0]$68 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$50_EN[7:0]$68 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$50_EN[7:0]$68 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$50_EN[7:0]$68 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$50_EN[7:0]$68 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$50_EN[7:0]$68 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$50_EN[7:0]$68 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$50_EN[7:0]$68 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$50_EN[7:0]$68 [0] }
+    Consolidated identical input bits for $mux cell $procmux$230:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$49_EN[7:0]$67
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$49_EN[7:0]$67 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$49_EN[7:0]$67 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$49_EN[7:0]$67 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$49_EN[7:0]$67 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$49_EN[7:0]$67 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$49_EN[7:0]$67 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$49_EN[7:0]$67 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$49_EN[7:0]$67 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$49_EN[7:0]$67 [0] }
+    Consolidated identical input bits for $mux cell $procmux$233:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$48_EN[7:0]$66
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$48_EN[7:0]$66 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$48_EN[7:0]$66 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$48_EN[7:0]$66 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$48_EN[7:0]$66 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$48_EN[7:0]$66 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$48_EN[7:0]$66 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$48_EN[7:0]$66 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$48_EN[7:0]$66 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$48_EN[7:0]$66 [0] }
+    Consolidated identical input bits for $mux cell $procmux$236:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$47_EN[7:0]$65
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$47_EN[7:0]$65 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$47_EN[7:0]$65 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$47_EN[7:0]$65 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$47_EN[7:0]$65 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$47_EN[7:0]$65 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$47_EN[7:0]$65 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$47_EN[7:0]$65 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$47_EN[7:0]$65 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$47_EN[7:0]$65 [0] }
+    Consolidated identical input bits for $mux cell $procmux$239:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$46_EN[7:0]$64
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$46_EN[7:0]$64 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$46_EN[7:0]$64 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$46_EN[7:0]$64 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$46_EN[7:0]$64 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$46_EN[7:0]$64 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$46_EN[7:0]$64 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$46_EN[7:0]$64 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$46_EN[7:0]$64 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$46_EN[7:0]$64 [0] }
+    Consolidated identical input bits for $mux cell $procmux$242:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$45_EN[7:0]$63
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$45_EN[7:0]$63 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$45_EN[7:0]$63 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$45_EN[7:0]$63 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$45_EN[7:0]$63 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$45_EN[7:0]$63 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$45_EN[7:0]$63 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$45_EN[7:0]$63 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$45_EN[7:0]$63 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$45_EN[7:0]$63 [0] }
+    Consolidated identical input bits for $mux cell $procmux$245:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$44_EN[7:0]$62
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$44_EN[7:0]$62 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$44_EN[7:0]$62 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$44_EN[7:0]$62 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$44_EN[7:0]$62 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$44_EN[7:0]$62 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$44_EN[7:0]$62 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$44_EN[7:0]$62 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$44_EN[7:0]$62 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$44_EN[7:0]$62 [0] }
+    Consolidated identical input bits for $mux cell $procmux$248:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$43_EN[7:0]$61
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$43_EN[7:0]$61 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$43_EN[7:0]$61 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$43_EN[7:0]$61 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$43_EN[7:0]$61 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$43_EN[7:0]$61 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$43_EN[7:0]$61 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$43_EN[7:0]$61 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$43_EN[7:0]$61 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$43_EN[7:0]$61 [0] }
+    Consolidated identical input bits for $mux cell $procmux$251:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$42_EN[7:0]$60
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$42_EN[7:0]$60 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$42_EN[7:0]$60 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$42_EN[7:0]$60 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$42_EN[7:0]$60 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$42_EN[7:0]$60 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$42_EN[7:0]$60 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$42_EN[7:0]$60 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$42_EN[7:0]$60 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$42_EN[7:0]$60 [0] }
+    Consolidated identical input bits for $mux cell $procmux$254:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$41_EN[7:0]$59
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$41_EN[7:0]$59 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$41_EN[7:0]$59 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$41_EN[7:0]$59 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$41_EN[7:0]$59 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$41_EN[7:0]$59 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$41_EN[7:0]$59 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$41_EN[7:0]$59 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$41_EN[7:0]$59 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$41_EN[7:0]$59 [0] }
+    Consolidated identical input bits for $mux cell $procmux$257:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$40_EN[7:0]$58
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$40_EN[7:0]$58 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$40_EN[7:0]$58 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$40_EN[7:0]$58 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$40_EN[7:0]$58 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$40_EN[7:0]$58 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$40_EN[7:0]$58 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$40_EN[7:0]$58 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$40_EN[7:0]$58 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$40_EN[7:0]$58 [0] }
+    Consolidated identical input bits for $mux cell $procmux$260:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$39_EN[7:0]$57
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$39_EN[7:0]$57 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$39_EN[7:0]$57 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$39_EN[7:0]$57 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$39_EN[7:0]$57 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$39_EN[7:0]$57 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$39_EN[7:0]$57 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$39_EN[7:0]$57 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$39_EN[7:0]$57 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$39_EN[7:0]$57 [0] }
+    Consolidated identical input bits for $mux cell $procmux$263:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$38_EN[7:0]$56
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$38_EN[7:0]$56 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$38_EN[7:0]$56 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$38_EN[7:0]$56 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$38_EN[7:0]$56 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$38_EN[7:0]$56 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$38_EN[7:0]$56 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$38_EN[7:0]$56 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$38_EN[7:0]$56 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$38_EN[7:0]$56 [0] }
+    Consolidated identical input bits for $mux cell $procmux$266:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$37_EN[7:0]$55
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$37_EN[7:0]$55 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$37_EN[7:0]$55 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$37_EN[7:0]$55 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$37_EN[7:0]$55 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$37_EN[7:0]$55 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$37_EN[7:0]$55 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$37_EN[7:0]$55 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$37_EN[7:0]$55 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$37_EN[7:0]$55 [0] }
+    Consolidated identical input bits for $mux cell $procmux$269:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$36_EN[7:0]$54
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$36_EN[7:0]$54 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$36_EN[7:0]$54 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$36_EN[7:0]$54 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$36_EN[7:0]$54 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$36_EN[7:0]$54 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$36_EN[7:0]$54 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$36_EN[7:0]$54 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$36_EN[7:0]$54 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$36_EN[7:0]$54 [0] }
+    Consolidated identical input bits for $mux cell $procmux$272:
+      Old ports: A=8'00000000, B=8'11111111, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$35_EN[7:0]$53
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:14$35_EN[7:0]$53 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:14$35_EN[7:0]$53 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:14$35_EN[7:0]$53 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$35_EN[7:0]$53 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$35_EN[7:0]$53 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$35_EN[7:0]$53 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$35_EN[7:0]$53 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$35_EN[7:0]$53 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:14$35_EN[7:0]$53 [0] }
+  Optimizing cells in module \weight_buffer.
+    Consolidated identical input bits for $mux cell $procmux$275:
+      Old ports: A=$2$memwr$\mem$rtl/memory/weight_buffer.v:17$51_EN[7:0]$93, B=8'00000000, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:17$51_EN[7:0]$71
+      New ports: A=$procmux$206_Y [0], B=1'0, Y=$0$memwr$\mem$rtl/memory/weight_buffer.v:17$51_EN[7:0]$71 [0]
+      New connections: $0$memwr$\mem$rtl/memory/weight_buffer.v:17$51_EN[7:0]$71 [7:1] = { $0$memwr$\mem$rtl/memory/weight_buffer.v:17$51_EN[7:0]$71 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:17$51_EN[7:0]$71 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:17$51_EN[7:0]$71 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:17$51_EN[7:0]$71 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:17$51_EN[7:0]$71 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:17$51_EN[7:0]$71 [0] $0$memwr$\mem$rtl/memory/weight_buffer.v:17$51_EN[7:0]$71 [0] }
+  Optimizing cells in module \weight_buffer.
+Performed a total of 24 changes.
+
+8.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+<suppressed ~9 debug messages>
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+<suppressed ~45 debug messages>
+Removed a total of 18 cells.
+
+8.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+Removed 0 unused cells and 24 unused wires.
+<suppressed ~2 debug messages>
+
+8.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+8.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \activation_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \controller_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \relu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \systolic_array..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_tinyml..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \weight_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~36 debug messages>
+
+8.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \activation_buffer.
+  Optimizing cells in module \controller_fsm.
+  Optimizing cells in module \relu.
+  Optimizing cells in module \systolic_array.
+  Optimizing cells in module \top_tinyml.
+  Optimizing cells in module \weight_buffer.
+Performed a total of 0 changes.
+
+8.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+8.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+
+8.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+8.6.16. Finished fast OPT passes. (There is nothing left to do.)
+
+8.7. Executing FSM pass (extract and optimize FSM).
+
+8.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+8.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+8.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+8.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+
+8.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+8.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+8.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+8.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+8.8. Executing OPT pass (performing simple optimizations).
+
+8.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+8.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+8.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \activation_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \controller_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \relu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \systolic_array..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_tinyml..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \weight_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~36 debug messages>
+
+8.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \activation_buffer.
+  Optimizing cells in module \controller_fsm.
+  Optimizing cells in module \relu.
+  Optimizing cells in module \systolic_array.
+  Optimizing cells in module \top_tinyml.
+  Optimizing cells in module \weight_buffer.
+Performed a total of 0 changes.
+
+8.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+8.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$285 ($dff) from module controller_fsm (D = $procmux$158_Y, Q = \count, rval = 5'00000).
+Adding EN signal on $auto$ff.cc:266:slice$335 ($sdff) from module controller_fsm (D = $add$rtl/control/controller_fsm.v:22$141_Y [4:0], Q = \count).
+Adding SRST signal on $procdff$284 ($dff) from module controller_fsm (D = $procmux$143_Y, Q = \done, rval = 1'0).
+Adding SRST signal on $procdff$283 ($dff) from module controller_fsm (D = $procmux$152_Y, Q = \load_weights, rval = 1'0).
+
+8.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+Removed 6 unused cells and 6 unused wires.
+<suppressed ~7 debug messages>
+
+8.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+8.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \activation_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \controller_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \relu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \systolic_array..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_tinyml..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \weight_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~29 debug messages>
+
+8.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \activation_buffer.
+  Optimizing cells in module \controller_fsm.
+  Optimizing cells in module \relu.
+  Optimizing cells in module \systolic_array.
+  Optimizing cells in module \top_tinyml.
+  Optimizing cells in module \weight_buffer.
+Performed a total of 0 changes.
+
+8.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 1 cells.
+
+8.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+8.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+8.8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \activation_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \controller_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \relu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \systolic_array..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_tinyml..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \weight_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~29 debug messages>
+
+8.8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \activation_buffer.
+  Optimizing cells in module \controller_fsm.
+  Optimizing cells in module \relu.
+  Optimizing cells in module \systolic_array.
+  Optimizing cells in module \top_tinyml.
+  Optimizing cells in module \weight_buffer.
+Performed a total of 0 changes.
+
+8.8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+8.8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+
+8.8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+8.8.23. Finished fast OPT passes. (There is nothing left to do.)
+
+8.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 30 address bits (of 32) from memory init port activation_buffer.$auto$proc_memwr.cc:45:proc_memwr$313 (mem).
+Removed top 30 address bits (of 32) from memory init port activation_buffer.$auto$proc_memwr.cc:45:proc_memwr$314 (mem).
+Removed top 30 address bits (of 32) from memory init port activation_buffer.$auto$proc_memwr.cc:45:proc_memwr$315 (mem).
+Removed top 30 address bits (of 32) from memory init port activation_buffer.$auto$proc_memwr.cc:45:proc_memwr$316 (mem).
+Removed top 30 address bits (of 32) from memory read port activation_buffer.$memrd$\mem$rtl/memory/activation_buffer.v:24$135 (mem).
+Removed top 30 address bits (of 32) from memory read port activation_buffer.$memrd$\mem$rtl/memory/activation_buffer.v:24$136 (mem).
+Removed top 30 address bits (of 32) from memory read port activation_buffer.$memrd$\mem$rtl/memory/activation_buffer.v:24$137 (mem).
+Removed top 30 address bits (of 32) from memory read port activation_buffer.$memrd$\mem$rtl/memory/activation_buffer.v:24$138 (mem).
+Removed top 28 bits (of 32) from port B of cell controller_fsm.$lt$rtl/control/controller_fsm.v:21$140 ($lt).
+Removed top 31 bits (of 32) from port B of cell controller_fsm.$add$rtl/control/controller_fsm.v:22$141 ($add).
+Removed top 27 bits (of 32) from port Y of cell controller_fsm.$add$rtl/control/controller_fsm.v:22$141 ($add).
+Removed top 27 bits (of 32) from wire controller_fsm.$add$rtl/control/controller_fsm.v:22$141_Y.
+Removed top 31 bits (of 32) from port B of cell relu.$lt$rtl/compute/relu.v:6$29 ($lt).
+Removed top 23 bits (of 32) from port B of cell relu.$gt$rtl/compute/relu.v:7$30 ($gt).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:14$1 ($mul).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:14$2 ($mul).
+Removed top 8 bits (of 24) from port A of cell systolic_array.$add$rtl/compute/systolic_array.v:14$3 ($add).
+Removed top 8 bits (of 24) from port B of cell systolic_array.$add$rtl/compute/systolic_array.v:14$3 ($add).
+Removed top 7 bits (of 24) from port Y of cell systolic_array.$add$rtl/compute/systolic_array.v:14$3 ($add).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:14$4 ($mul).
+Removed top 7 bits (of 24) from port A of cell systolic_array.$add$rtl/compute/systolic_array.v:14$5 ($add).
+Removed top 8 bits (of 24) from port B of cell systolic_array.$add$rtl/compute/systolic_array.v:14$5 ($add).
+Removed top 6 bits (of 24) from port Y of cell systolic_array.$add$rtl/compute/systolic_array.v:14$5 ($add).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:14$6 ($mul).
+Removed top 6 bits (of 24) from port A of cell systolic_array.$add$rtl/compute/systolic_array.v:14$7 ($add).
+Removed top 8 bits (of 24) from port B of cell systolic_array.$add$rtl/compute/systolic_array.v:14$7 ($add).
+Removed top 5 bits (of 24) from port Y of cell systolic_array.$add$rtl/compute/systolic_array.v:14$7 ($add).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:17$8 ($mul).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:17$9 ($mul).
+Removed top 8 bits (of 24) from port A of cell systolic_array.$add$rtl/compute/systolic_array.v:17$10 ($add).
+Removed top 8 bits (of 24) from port B of cell systolic_array.$add$rtl/compute/systolic_array.v:17$10 ($add).
+Removed top 7 bits (of 24) from port Y of cell systolic_array.$add$rtl/compute/systolic_array.v:17$10 ($add).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:17$11 ($mul).
+Removed top 7 bits (of 24) from port A of cell systolic_array.$add$rtl/compute/systolic_array.v:17$12 ($add).
+Removed top 8 bits (of 24) from port B of cell systolic_array.$add$rtl/compute/systolic_array.v:17$12 ($add).
+Removed top 6 bits (of 24) from port Y of cell systolic_array.$add$rtl/compute/systolic_array.v:17$12 ($add).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:17$13 ($mul).
+Removed top 6 bits (of 24) from port A of cell systolic_array.$add$rtl/compute/systolic_array.v:17$14 ($add).
+Removed top 8 bits (of 24) from port B of cell systolic_array.$add$rtl/compute/systolic_array.v:17$14 ($add).
+Removed top 5 bits (of 24) from port Y of cell systolic_array.$add$rtl/compute/systolic_array.v:17$14 ($add).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:20$15 ($mul).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:20$16 ($mul).
+Removed top 8 bits (of 24) from port A of cell systolic_array.$add$rtl/compute/systolic_array.v:20$17 ($add).
+Removed top 8 bits (of 24) from port B of cell systolic_array.$add$rtl/compute/systolic_array.v:20$17 ($add).
+Removed top 7 bits (of 24) from port Y of cell systolic_array.$add$rtl/compute/systolic_array.v:20$17 ($add).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:20$18 ($mul).
+Removed top 7 bits (of 24) from port A of cell systolic_array.$add$rtl/compute/systolic_array.v:20$19 ($add).
+Removed top 8 bits (of 24) from port B of cell systolic_array.$add$rtl/compute/systolic_array.v:20$19 ($add).
+Removed top 6 bits (of 24) from port Y of cell systolic_array.$add$rtl/compute/systolic_array.v:20$19 ($add).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:20$20 ($mul).
+Removed top 6 bits (of 24) from port A of cell systolic_array.$add$rtl/compute/systolic_array.v:20$21 ($add).
+Removed top 8 bits (of 24) from port B of cell systolic_array.$add$rtl/compute/systolic_array.v:20$21 ($add).
+Removed top 5 bits (of 24) from port Y of cell systolic_array.$add$rtl/compute/systolic_array.v:20$21 ($add).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:23$22 ($mul).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:23$23 ($mul).
+Removed top 8 bits (of 24) from port A of cell systolic_array.$add$rtl/compute/systolic_array.v:23$24 ($add).
+Removed top 8 bits (of 24) from port B of cell systolic_array.$add$rtl/compute/systolic_array.v:23$24 ($add).
+Removed top 7 bits (of 24) from port Y of cell systolic_array.$add$rtl/compute/systolic_array.v:23$24 ($add).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:23$25 ($mul).
+Removed top 7 bits (of 24) from port A of cell systolic_array.$add$rtl/compute/systolic_array.v:23$26 ($add).
+Removed top 8 bits (of 24) from port B of cell systolic_array.$add$rtl/compute/systolic_array.v:23$26 ($add).
+Removed top 6 bits (of 24) from port Y of cell systolic_array.$add$rtl/compute/systolic_array.v:23$26 ($add).
+Removed top 8 bits (of 24) from port Y of cell systolic_array.$mul$rtl/compute/systolic_array.v:23$27 ($mul).
+Removed top 6 bits (of 24) from port A of cell systolic_array.$add$rtl/compute/systolic_array.v:23$28 ($add).
+Removed top 8 bits (of 24) from port B of cell systolic_array.$add$rtl/compute/systolic_array.v:23$28 ($add).
+Removed top 5 bits (of 24) from port Y of cell systolic_array.$add$rtl/compute/systolic_array.v:23$28 ($add).
+Removed top 7 bits (of 24) from wire systolic_array.$add$rtl/compute/systolic_array.v:14$3_Y.
+Removed top 6 bits (of 24) from wire systolic_array.$add$rtl/compute/systolic_array.v:14$5_Y.
+Removed top 7 bits (of 24) from wire systolic_array.$add$rtl/compute/systolic_array.v:17$10_Y.
+Removed top 6 bits (of 24) from wire systolic_array.$add$rtl/compute/systolic_array.v:17$12_Y.
+Removed top 7 bits (of 24) from wire systolic_array.$add$rtl/compute/systolic_array.v:20$17_Y.
+Removed top 6 bits (of 24) from wire systolic_array.$add$rtl/compute/systolic_array.v:20$19_Y.
+Removed top 7 bits (of 24) from wire systolic_array.$add$rtl/compute/systolic_array.v:23$24_Y.
+Removed top 6 bits (of 24) from wire systolic_array.$add$rtl/compute/systolic_array.v:23$26_Y.
+Removed top 8 bits (of 24) from wire systolic_array.$mul$rtl/compute/systolic_array.v:14$1_Y.
+Removed top 8 bits (of 24) from wire systolic_array.$mul$rtl/compute/systolic_array.v:14$2_Y.
+Removed top 8 bits (of 24) from wire systolic_array.$mul$rtl/compute/systolic_array.v:14$6_Y.
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$318 (mem).
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$319 (mem).
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$320 (mem).
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$321 (mem).
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$322 (mem).
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$323 (mem).
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$324 (mem).
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$325 (mem).
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$326 (mem).
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$327 (mem).
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$328 (mem).
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$329 (mem).
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$330 (mem).
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$331 (mem).
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$332 (mem).
+Removed top 28 address bits (of 32) from memory init port weight_buffer.$auto$proc_memwr.cc:45:proc_memwr$333 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$100 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$101 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$102 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$103 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$104 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$105 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$106 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$107 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$108 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$109 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$110 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$95 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$96 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$97 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$98 (mem).
+Removed top 28 address bits (of 32) from memory read port weight_buffer.$memrd$\mem$rtl/memory/weight_buffer.v:24$99 (mem).
+
+8.10. Executing PEEPOPT pass (run peephole optimizers).
+
+8.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+Removed 0 unused cells and 12 unused wires.
+<suppressed ~2 debug messages>
+
+8.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module activation_buffer:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module controller_fsm:
+  creating $macc model for $add$rtl/control/controller_fsm.v:22$141 ($add).
+  creating $alu model for $macc $add$rtl/control/controller_fsm.v:22$141.
+  creating $alu model for $lt$rtl/control/controller_fsm.v:21$140 ($lt): new $alu
+  creating $alu cell for $lt$rtl/control/controller_fsm.v:21$140: $auto$alumacc.cc:495:replace_alu$356
+  creating $alu cell for $add$rtl/control/controller_fsm.v:22$141: $auto$alumacc.cc:495:replace_alu$361
+  created 2 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module relu:
+  creating $alu model for $gt$rtl/compute/relu.v:7$30 ($gt): new $alu
+  creating $alu model for $lt$rtl/compute/relu.v:6$29 ($lt): new $alu
+  creating $alu cell for $lt$rtl/compute/relu.v:6$29: $auto$alumacc.cc:495:replace_alu$366
+  creating $alu cell for $gt$rtl/compute/relu.v:7$30: $auto$alumacc.cc:495:replace_alu$373
+  created 2 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module systolic_array:
+  creating $macc model for $add$rtl/compute/systolic_array.v:14$3 ($add).
+  creating $macc model for $add$rtl/compute/systolic_array.v:14$5 ($add).
+  creating $macc model for $add$rtl/compute/systolic_array.v:14$7 ($add).
+  creating $macc model for $add$rtl/compute/systolic_array.v:17$10 ($add).
+  creating $macc model for $add$rtl/compute/systolic_array.v:17$12 ($add).
+  creating $macc model for $add$rtl/compute/systolic_array.v:17$14 ($add).
+  creating $macc model for $add$rtl/compute/systolic_array.v:20$17 ($add).
+  creating $macc model for $add$rtl/compute/systolic_array.v:20$19 ($add).
+  creating $macc model for $add$rtl/compute/systolic_array.v:20$21 ($add).
+  creating $macc model for $add$rtl/compute/systolic_array.v:23$24 ($add).
+  creating $macc model for $add$rtl/compute/systolic_array.v:23$26 ($add).
+  creating $macc model for $add$rtl/compute/systolic_array.v:23$28 ($add).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:14$1 ($mul).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:14$2 ($mul).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:14$4 ($mul).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:14$6 ($mul).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:17$11 ($mul).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:17$13 ($mul).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:17$8 ($mul).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:17$9 ($mul).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:20$15 ($mul).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:20$16 ($mul).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:20$18 ($mul).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:20$20 ($mul).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:23$22 ($mul).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:23$23 ($mul).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:23$25 ($mul).
+  creating $macc model for $mul$rtl/compute/systolic_array.v:23$27 ($mul).
+  merging $macc model for $add$rtl/compute/systolic_array.v:23$26 into $add$rtl/compute/systolic_array.v:23$28.
+  merging $macc model for $add$rtl/compute/systolic_array.v:23$24 into $add$rtl/compute/systolic_array.v:23$28.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:23$22 into $add$rtl/compute/systolic_array.v:23$28.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:23$27 into $add$rtl/compute/systolic_array.v:23$28.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:23$25 into $add$rtl/compute/systolic_array.v:23$28.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:23$23 into $add$rtl/compute/systolic_array.v:23$28.
+  merging $macc model for $add$rtl/compute/systolic_array.v:20$19 into $add$rtl/compute/systolic_array.v:20$21.
+  merging $macc model for $add$rtl/compute/systolic_array.v:20$17 into $add$rtl/compute/systolic_array.v:20$21.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:20$15 into $add$rtl/compute/systolic_array.v:20$21.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:20$20 into $add$rtl/compute/systolic_array.v:20$21.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:20$18 into $add$rtl/compute/systolic_array.v:20$21.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:20$16 into $add$rtl/compute/systolic_array.v:20$21.
+  merging $macc model for $add$rtl/compute/systolic_array.v:17$12 into $add$rtl/compute/systolic_array.v:17$14.
+  merging $macc model for $add$rtl/compute/systolic_array.v:17$10 into $add$rtl/compute/systolic_array.v:17$14.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:17$8 into $add$rtl/compute/systolic_array.v:17$14.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:17$13 into $add$rtl/compute/systolic_array.v:17$14.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:17$11 into $add$rtl/compute/systolic_array.v:17$14.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:17$9 into $add$rtl/compute/systolic_array.v:17$14.
+  merging $macc model for $add$rtl/compute/systolic_array.v:14$5 into $add$rtl/compute/systolic_array.v:14$7.
+  merging $macc model for $add$rtl/compute/systolic_array.v:14$3 into $add$rtl/compute/systolic_array.v:14$7.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:14$1 into $add$rtl/compute/systolic_array.v:14$7.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:14$6 into $add$rtl/compute/systolic_array.v:14$7.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:14$4 into $add$rtl/compute/systolic_array.v:14$7.
+  merging $macc model for $mul$rtl/compute/systolic_array.v:14$2 into $add$rtl/compute/systolic_array.v:14$7.
+  creating $macc cell for $add$rtl/compute/systolic_array.v:17$14: $auto$alumacc.cc:365:replace_macc$386
+  creating $macc cell for $add$rtl/compute/systolic_array.v:14$7: $auto$alumacc.cc:365:replace_macc$387
+  creating $macc cell for $add$rtl/compute/systolic_array.v:20$21: $auto$alumacc.cc:365:replace_macc$388
+  creating $macc cell for $add$rtl/compute/systolic_array.v:23$28: $auto$alumacc.cc:365:replace_macc$389
+  created 0 $alu and 4 $macc cells.
+Extracting $alu and $macc cells in module top_tinyml:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module weight_buffer:
+  created 0 $alu and 0 $macc cells.
+
+8.13. Executing SHARE pass (SAT-based resource sharing).
+Found 16 cells in module systolic_array that may be considered for resource sharing.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:23$27 ($mul):
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:23$27
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:23$25 ($mul):
+    Found cell that is never activated: $add$rtl/compute/systolic_array.v:23$26
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:23$25
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:23$23 ($mul):
+    Found cell that is never activated: $add$rtl/compute/systolic_array.v:23$24
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:23$23
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:23$22 ($mul):
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:23$22
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:20$20 ($mul):
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:20$20
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:20$18 ($mul):
+    Found cell that is never activated: $add$rtl/compute/systolic_array.v:20$19
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:20$18
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:20$16 ($mul):
+    Found cell that is never activated: $add$rtl/compute/systolic_array.v:20$17
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:20$16
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:20$15 ($mul):
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:20$15
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:17$9 ($mul):
+    Found cell that is never activated: $add$rtl/compute/systolic_array.v:17$12
+    Found cell that is never activated: $add$rtl/compute/systolic_array.v:17$10
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:17$9
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:17$8 ($mul):
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:17$8
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:17$13 ($mul):
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:17$13
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:17$11 ($mul):
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:17$11
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:14$6 ($mul):
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:14$6
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:14$4 ($mul):
+    Found cell that is never activated: $add$rtl/compute/systolic_array.v:14$5
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:14$4
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:14$2 ($mul):
+    Found cell that is never activated: $add$rtl/compute/systolic_array.v:14$3
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:14$2
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $mul$rtl/compute/systolic_array.v:14$1 ($mul):
+    Found cell that is never activated: $mul$rtl/compute/systolic_array.v:14$1
+    Cell is never active. Sharing is pointless, we simply remove it.
+Removing 24 cells in module systolic_array:
+  Removing cell $mul$rtl/compute/systolic_array.v:14$1 ($mul).
+  Removing cell $mul$rtl/compute/systolic_array.v:14$2 ($mul).
+  Removing cell $add$rtl/compute/systolic_array.v:14$3 ($add).
+  Removing cell $mul$rtl/compute/systolic_array.v:14$4 ($mul).
+  Removing cell $add$rtl/compute/systolic_array.v:14$5 ($add).
+  Removing cell $mul$rtl/compute/systolic_array.v:14$6 ($mul).
+  Removing cell $mul$rtl/compute/systolic_array.v:17$11 ($mul).
+  Removing cell $mul$rtl/compute/systolic_array.v:17$13 ($mul).
+  Removing cell $mul$rtl/compute/systolic_array.v:17$8 ($mul).
+  Removing cell $mul$rtl/compute/systolic_array.v:17$9 ($mul).
+  Removing cell $add$rtl/compute/systolic_array.v:17$10 ($add).
+  Removing cell $add$rtl/compute/systolic_array.v:17$12 ($add).
+  Removing cell $mul$rtl/compute/systolic_array.v:20$15 ($mul).
+  Removing cell $mul$rtl/compute/systolic_array.v:20$16 ($mul).
+  Removing cell $add$rtl/compute/systolic_array.v:20$17 ($add).
+  Removing cell $mul$rtl/compute/systolic_array.v:20$18 ($mul).
+  Removing cell $add$rtl/compute/systolic_array.v:20$19 ($add).
+  Removing cell $mul$rtl/compute/systolic_array.v:20$20 ($mul).
+  Removing cell $mul$rtl/compute/systolic_array.v:23$22 ($mul).
+  Removing cell $mul$rtl/compute/systolic_array.v:23$23 ($mul).
+  Removing cell $add$rtl/compute/systolic_array.v:23$24 ($add).
+  Removing cell $mul$rtl/compute/systolic_array.v:23$25 ($mul).
+  Removing cell $add$rtl/compute/systolic_array.v:23$26 ($add).
+  Removing cell $mul$rtl/compute/systolic_array.v:23$27 ($mul).
+
+8.14. Executing OPT pass (performing simple optimizations).
+
+8.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+<suppressed ~2 debug messages>
+Optimizing module relu.
+<suppressed ~4 debug messages>
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+8.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+8.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \activation_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \controller_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \relu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \systolic_array..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_tinyml..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \weight_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~29 debug messages>
+
+8.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \activation_buffer.
+  Optimizing cells in module \controller_fsm.
+  Optimizing cells in module \relu.
+  Optimizing cells in module \systolic_array.
+  Optimizing cells in module \top_tinyml.
+  Optimizing cells in module \weight_buffer.
+Performed a total of 0 changes.
+
+8.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+8.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+Removed 3 unused cells and 35 unused wires.
+<suppressed ~7 debug messages>
+
+8.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+8.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \activation_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \controller_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \relu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \systolic_array..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_tinyml..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \weight_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~29 debug messages>
+
+8.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \activation_buffer.
+  Optimizing cells in module \controller_fsm.
+  Optimizing cells in module \relu.
+  Optimizing cells in module \systolic_array.
+  Optimizing cells in module \top_tinyml.
+  Optimizing cells in module \weight_buffer.
+Performed a total of 0 changes.
+
+8.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+8.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+
+8.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+8.14.16. Finished fast OPT passes. (There is nothing left to do.)
+
+8.15. Executing MEMORY pass.
+
+8.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+8.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 126 transformations.
+
+8.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+  Analyzing activation_buffer.mem write port 0.
+  Analyzing activation_buffer.mem write port 1.
+  Analyzing activation_buffer.mem write port 2.
+  Analyzing activation_buffer.mem write port 3.
+  Analyzing activation_buffer.mem write port 4.
+  Analyzing weight_buffer.mem write port 0.
+  Analyzing weight_buffer.mem write port 1.
+  Analyzing weight_buffer.mem write port 2.
+  Analyzing weight_buffer.mem write port 3.
+  Analyzing weight_buffer.mem write port 4.
+  Analyzing weight_buffer.mem write port 5.
+  Analyzing weight_buffer.mem write port 6.
+  Analyzing weight_buffer.mem write port 7.
+  Analyzing weight_buffer.mem write port 8.
+  Analyzing weight_buffer.mem write port 9.
+  Analyzing weight_buffer.mem write port 10.
+  Analyzing weight_buffer.mem write port 11.
+  Analyzing weight_buffer.mem write port 12.
+  Analyzing weight_buffer.mem write port 13.
+  Analyzing weight_buffer.mem write port 14.
+  Analyzing weight_buffer.mem write port 15.
+  Analyzing weight_buffer.mem write port 16.
+
+8.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+8.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+Checking read port `\mem'[0] in module `\activation_buffer': no output FF found.
+Checking read port `\mem'[1] in module `\activation_buffer': no output FF found.
+Checking read port `\mem'[2] in module `\activation_buffer': no output FF found.
+Checking read port `\mem'[3] in module `\activation_buffer': no output FF found.
+Checking read port address `\mem'[0] in module `\activation_buffer': no address FF found.
+Checking read port address `\mem'[1] in module `\activation_buffer': no address FF found.
+Checking read port address `\mem'[2] in module `\activation_buffer': no address FF found.
+Checking read port address `\mem'[3] in module `\activation_buffer': no address FF found.
+Checking read port `\mem'[0] in module `\weight_buffer': no output FF found.
+Checking read port `\mem'[1] in module `\weight_buffer': no output FF found.
+Checking read port `\mem'[2] in module `\weight_buffer': no output FF found.
+Checking read port `\mem'[3] in module `\weight_buffer': no output FF found.
+Checking read port `\mem'[4] in module `\weight_buffer': no output FF found.
+Checking read port `\mem'[5] in module `\weight_buffer': no output FF found.
+Checking read port `\mem'[6] in module `\weight_buffer': no output FF found.
+Checking read port `\mem'[7] in module `\weight_buffer': no output FF found.
+Checking read port `\mem'[8] in module `\weight_buffer': no output FF found.
+Checking read port `\mem'[9] in module `\weight_buffer': no output FF found.
+Checking read port `\mem'[10] in module `\weight_buffer': no output FF found.
+Checking read port `\mem'[11] in module `\weight_buffer': no output FF found.
+Checking read port `\mem'[12] in module `\weight_buffer': no output FF found.
+Checking read port `\mem'[13] in module `\weight_buffer': no output FF found.
+Checking read port `\mem'[14] in module `\weight_buffer': no output FF found.
+Checking read port `\mem'[15] in module `\weight_buffer': no output FF found.
+Checking read port address `\mem'[0] in module `\weight_buffer': no address FF found.
+Checking read port address `\mem'[1] in module `\weight_buffer': no address FF found.
+Checking read port address `\mem'[2] in module `\weight_buffer': no address FF found.
+Checking read port address `\mem'[3] in module `\weight_buffer': no address FF found.
+Checking read port address `\mem'[4] in module `\weight_buffer': no address FF found.
+Checking read port address `\mem'[5] in module `\weight_buffer': no address FF found.
+Checking read port address `\mem'[6] in module `\weight_buffer': no address FF found.
+Checking read port address `\mem'[7] in module `\weight_buffer': no address FF found.
+Checking read port address `\mem'[8] in module `\weight_buffer': no address FF found.
+Checking read port address `\mem'[9] in module `\weight_buffer': no address FF found.
+Checking read port address `\mem'[10] in module `\weight_buffer': no address FF found.
+Checking read port address `\mem'[11] in module `\weight_buffer': no address FF found.
+Checking read port address `\mem'[12] in module `\weight_buffer': no address FF found.
+Checking read port address `\mem'[13] in module `\weight_buffer': no address FF found.
+Checking read port address `\mem'[14] in module `\weight_buffer': no address FF found.
+Checking read port address `\mem'[15] in module `\weight_buffer': no address FF found.
+
+8.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+
+8.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+Consolidating read ports of memory activation_buffer.mem by address:
+  Merging ports 0, 1 (address 2'11).
+  Merging ports 0, 2 (address 2'10).
+Consolidating read ports of memory activation_buffer.mem by address:
+Consolidating write ports of memory activation_buffer.mem by address:
+  Merging ports 0, 1 (address 2'00).
+  Merging ports 0, 2 (address 2'00).
+Consolidating write ports of memory activation_buffer.mem by address:
+Consolidating write ports of memory activation_buffer.mem using sat-based resource sharing:
+  Checking group clocked with posedge \clk, width 8: ports 1, 2.
+  Common input cone for all EN signals: 3 cells.
+  Size of unconstrained SAT problem: 23 variables, 53 clauses
+  Merging port 2 into port 1.
+Consolidating read ports of memory weight_buffer.mem by address:
+  Merging ports 0, 15 (address 4'0100).
+  Merging ports 1, 2 (address 4'0011).
+  Merging ports 1, 3 (address 4'0010).
+  Merging ports 1, 4 (address 4'0000).
+  Merging ports 1, 13 (address 4'0000).
+  Merging ports 1, 14 (address 4'0000).
+  Merging ports 5, 6 (address 4'1111).
+  Merging ports 5, 7 (address 4'1110).
+  Merging ports 5, 8 (address 4'1100).
+  Merging ports 5, 9 (address 4'1100).
+  Merging ports 5, 10 (address 4'1000).
+  Merging ports 5, 11 (address 4'1000).
+  Merging ports 5, 12 (address 4'1000).
+Consolidating read ports of memory weight_buffer.mem by address:
+  Merging ports 0, 1 (address 4'0100).
+  Merging ports 0, 2 (address 4'0000).
+Consolidating write ports of memory weight_buffer.mem by address:
+  Merging ports 0, 1 (address 4'0000).
+  Merging ports 0, 2 (address 4'0000).
+  Merging ports 0, 3 (address 4'0000).
+  Merging ports 0, 4 (address 4'0000).
+  Merging ports 0, 5 (address 4'0000).
+  Merging ports 0, 6 (address 4'0000).
+  Merging ports 0, 7 (address 4'0000).
+  Merging ports 0, 8 (address 4'0000).
+  Merging ports 10, 11 (address 4'1010).
+  Merging ports 12, 13 (address 4'1100).
+  Merging ports 12, 14 (address 4'1100).
+  Merging ports 12, 15 (address 4'1100).
+Consolidating write ports of memory weight_buffer.mem by address:
+  Merging ports 1, 2 (address 4'1001).
+  Merging ports 1, 3 (address 4'1000).
+Consolidating write ports of memory weight_buffer.mem by address:
+Consolidating write ports of memory weight_buffer.mem using sat-based resource sharing:
+
+8.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+8.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+Removed 0 unused cells and 16 unused wires.
+<suppressed ~2 debug messages>
+
+8.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+8.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+
+8.17. Executing OPT pass (performing simple optimizations).
+
+8.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+<suppressed ~7 debug messages>
+Optimizing module controller_fsm.
+<suppressed ~3 debug messages>
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+<suppressed ~6 debug messages>
+
+8.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+8.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+Removed 1 unused cells and 16 unused wires.
+<suppressed ~4 debug messages>
+
+8.17.5. Finished fast OPT passes.
+
+8.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+Mapping memory \mem in module \activation_buffer:
+  created 4 $dff cells and 0 static cells of width 8.
+  read interface: 0 $dff and 3 $mux cells.
+  write interface: 8 write mux blocks.
+Mapping memory \mem in module \weight_buffer:
+  created 16 $dff cells and 0 static cells of width 8.
+  read interface: 0 $dff and 0 $mux cells.
+  write interface: 48 write mux blocks.
+
+8.19. Executing OPT pass (performing simple optimizations).
+
+8.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+<suppressed ~13 debug messages>
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+<suppressed ~59 debug messages>
+
+8.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+8.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \activation_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port B of cell $auto$memory_share.cc:454:consolidate_wr_using_sat$441: $0$memwr$\mem$rtl/memory/activation_buffer.v:19$115_EN[7:0]$123 [7] -> 1'1
+  Analyzing evaluation results.
+Running muxtree optimizer on module \controller_fsm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \relu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \systolic_array..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_tinyml..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \weight_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~76 debug messages>
+
+8.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \activation_buffer.
+  Optimizing cells in module \controller_fsm.
+  Optimizing cells in module \relu.
+  Optimizing cells in module \systolic_array.
+  Optimizing cells in module \top_tinyml.
+  Optimizing cells in module \weight_buffer.
+Performed a total of 0 changes.
+
+8.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+8.19.6. Executing OPT_SHARE pass.
+
+8.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+Removed 0 unused cells and 89 unused wires.
+<suppressed ~2 debug messages>
+
+8.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+<suppressed ~1 debug messages>
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+8.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \activation_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \controller_fsm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \relu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \systolic_array..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_tinyml..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \weight_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~74 debug messages>
+
+8.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \activation_buffer.
+  Optimizing cells in module \controller_fsm.
+  Optimizing cells in module \relu.
+  Optimizing cells in module \systolic_array.
+  Optimizing cells in module \top_tinyml.
+  Optimizing cells in module \weight_buffer.
+Performed a total of 0 changes.
+
+8.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+8.19.14. Executing OPT_SHARE pass.
+
+8.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $memory\mem[3]$465 ($dff) from module activation_buffer (D = $auto$rtlil.cc:3270:Mux$439, Q = \mem[3]).
+Adding EN signal on $memory\mem[2]$463 ($dff) from module activation_buffer (D = $memory\mem$wrmux[2][1][0]$y$515, Q = \mem[2]).
+Adding EN signal on $memory\mem[1]$461 ($dff) from module activation_buffer (D = $memory\mem$wrmux[1][1][0]$y$503, Q = \mem[1]).
+Adding EN signal on $memory\mem[0]$459 ($dff) from module activation_buffer (D = $memory\mem$wrmux[0][1][0]$y$491, Q = \mem[0]).
+Adding EN signal on $memory\mem[9]$544 ($dff) from module weight_buffer (D = $memory\mem$wrmux[9][2][0]$y$733, Q = \mem[9]).
+Adding EN signal on $memory\mem[8]$542 ($dff) from module weight_buffer (D = $memory\mem$wrmux[8][2][0]$y$719, Q = \mem[8]).
+Adding EN signal on $memory\mem[7]$540 ($dff) from module weight_buffer (D = $memory\mem$wrmux[7][2][0]$y$699, Q = \mem[7]).
+Adding EN signal on $memory\mem[6]$538 ($dff) from module weight_buffer (D = $memory\mem$wrmux[6][2][0]$y$685, Q = \mem[6]).
+Adding EN signal on $memory\mem[5]$536 ($dff) from module weight_buffer (D = $memory\mem$wrmux[5][2][0]$y$671, Q = \mem[5]).
+Adding EN signal on $memory\mem[4]$534 ($dff) from module weight_buffer (D = $memory\mem$wrmux[4][2][0]$y$657, Q = \mem[4]).
+Adding EN signal on $memory\mem[3]$532 ($dff) from module weight_buffer (D = $memory\mem$wrmux[3][2][0]$y$639, Q = \mem[3]).
+Adding EN signal on $memory\mem[2]$530 ($dff) from module weight_buffer (D = $memory\mem$wrmux[2][2][0]$y$623, Q = \mem[2]).
+Adding EN signal on $memory\mem[1]$528 ($dff) from module weight_buffer (D = $memory\mem$wrmux[1][2][0]$y$605, Q = \mem[1]).
+Adding EN signal on $memory\mem[15]$556 ($dff) from module weight_buffer (D = $memory\mem$wrmux[15][2][0]$y$819, Q = \mem[15]).
+Adding EN signal on $memory\mem[14]$554 ($dff) from module weight_buffer (D = $memory\mem$wrmux[14][2][0]$y$805, Q = \mem[14]).
+Adding EN signal on $memory\mem[13]$552 ($dff) from module weight_buffer (D = $memory\mem$wrmux[13][2][0]$y$791, Q = \mem[13]).
+Adding EN signal on $memory\mem[12]$550 ($dff) from module weight_buffer (D = $memory\mem$wrmux[12][2][0]$y$777, Q = \mem[12]).
+Adding EN signal on $memory\mem[11]$548 ($dff) from module weight_buffer (D = $memory\mem$wrmux[11][2][0]$y$761, Q = \mem[11]).
+Adding EN signal on $memory\mem[10]$546 ($dff) from module weight_buffer (D = $memory\mem$wrmux[10][2][0]$y$747, Q = \mem[10]).
+Adding EN signal on $memory\mem[0]$526 ($dff) from module weight_buffer (D = $memory\mem$wrmux[0][2][0]$y$587, Q = \mem[0]).
+
+8.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+Removed 1 unused cells and 1 unused wires.
+<suppressed ~2 debug messages>
+
+8.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+<suppressed ~6 debug messages>
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+<suppressed ~32 debug messages>
+
+8.19.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.19.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \activation_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \controller_fsm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \relu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \systolic_array..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_tinyml..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \weight_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~49 debug messages>
+
+8.19.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \activation_buffer.
+  Optimizing cells in module \controller_fsm.
+  Optimizing cells in module \relu.
+  Optimizing cells in module \systolic_array.
+  Optimizing cells in module \top_tinyml.
+  Optimizing cells in module \weight_buffer.
+Performed a total of 0 changes.
+
+8.19.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+8.19.22. Executing OPT_SHARE pass.
+
+8.19.23. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $auto$ff.cc:266:slice$821 ($dffe) from module activation_buffer (D = $auto$rtlil.cc:3270:Mux$439, Q = \mem[2], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$824 ($dffe) from module activation_buffer (D = $auto$rtlil.cc:3270:Mux$439, Q = \mem[1], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$827 ($dffe) from module activation_buffer (D = $auto$rtlil.cc:3270:Mux$439, Q = \mem[0], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$863 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[13], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$836 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[7], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$839 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[6], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$842 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[5], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$845 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[4], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$848 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[3], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$866 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[12], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$869 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[11], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$833 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[8], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$875 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[0], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$872 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[10], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$857 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[15], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$851 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[2], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$854 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[1], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$860 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[14], rval = 8'00000000).
+Adding SRST signal on $auto$ff.cc:266:slice$830 ($dffe) from module weight_buffer (D = \data_in, Q = \mem[9], rval = 8'00000000).
+
+8.19.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+Removed 19 unused cells and 38 unused wires.
+<suppressed ~21 debug messages>
+
+8.19.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+8.19.26. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.19.27. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \activation_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \controller_fsm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \relu..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \systolic_array..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_tinyml..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \weight_buffer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~11 debug messages>
+
+8.19.28. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \activation_buffer.
+  Optimizing cells in module \controller_fsm.
+  Optimizing cells in module \relu.
+  Optimizing cells in module \systolic_array.
+  Optimizing cells in module \top_tinyml.
+  Optimizing cells in module \weight_buffer.
+Performed a total of 0 changes.
+
+8.19.29. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+8.19.30. Executing OPT_SHARE pass.
+
+8.19.31. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.19.32. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+
+8.19.33. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+8.19.34. Finished fast OPT passes. (There is nothing left to do.)
+
+8.20. Executing TECHMAP pass (map to technology primitives).
+
+8.20.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/local/bin/../share/yosys/techmap.v' to AST representation.
+verilog frontend filename /usr/local/bin/../share/yosys/techmap.v
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `\$connect'.
+Generating RTLIL representation for module `\$input_port'.
+Successfully finished Verilog frontend.
+
+8.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $sdffce.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper maccmap for cells of type $macc_v2.
+  add \act_in_bus [7:0] * \weight_bus [71:64] (8x8 bits, unsigned)
+  add \act_in_bus [31:24] * \weight_bus [95:88] (8x8 bits, unsigned)
+  add \act_in_bus [23:16] * \weight_bus [87:80] (8x8 bits, unsigned)
+  add \act_in_bus [15:8] * \weight_bus [79:72] (8x8 bits, unsigned)
+  add \act_in_bus [7:0] * \weight_bus [7:0] (8x8 bits, unsigned)
+  add \act_in_bus [31:24] * \weight_bus [31:24] (8x8 bits, unsigned)
+  add \act_in_bus [23:16] * \weight_bus [23:16] (8x8 bits, unsigned)
+  add \act_in_bus [15:8] * \weight_bus [15:8] (8x8 bits, unsigned)
+  add \act_in_bus [7:0] * \weight_bus [103:96] (8x8 bits, unsigned)
+  add \act_in_bus [31:24] * \weight_bus [127:120] (8x8 bits, unsigned)
+  add \act_in_bus [23:16] * \weight_bus [119:112] (8x8 bits, unsigned)
+  add \act_in_bus [15:8] * \weight_bus [111:104] (8x8 bits, unsigned)
+  add \act_in_bus [7:0] * \weight_bus [39:32] (8x8 bits, unsigned)
+  add \act_in_bus [31:24] * \weight_bus [63:56] (8x8 bits, unsigned)
+  add \act_in_bus [23:16] * \weight_bus [55:48] (8x8 bits, unsigned)
+  add \act_in_bus [15:8] * \weight_bus [47:40] (8x8 bits, unsigned)
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000010011 for cells of type $fa.
+Using template $paramod$4e6ee5eb737cf7428f8e246e911ae1dac9ae2979\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010011 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod$226172a71c04049160b272bdddffb9ebd2db9a5b\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000011000 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000011000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $sdff.
+Using extmapper simplemap for cells of type $reduce_or.
+Using template $paramod$672a140277c71df8314410f22acc08d55222c3c7\_90_alu for cells of type $alu.
+Using template $paramod$f956edc9fe4df758d9fdb10bfc518a364c99e75e\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $sdffe.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000101 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000101 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000100 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+Using extmapper simplemap for cells of type $dffe.
+No more expansions possible.
+<suppressed ~2142 debug messages>
+
+8.21. Executing OPT pass (performing simple optimizations).
+
+8.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+<suppressed ~75 debug messages>
+Optimizing module relu.
+<suppressed ~187 debug messages>
+Optimizing module systolic_array.
+<suppressed ~8084 debug messages>
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+8.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+<suppressed ~12 debug messages>
+Finding identical cells in module `\relu'.
+<suppressed ~66 debug messages>
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 26 cells.
+
+8.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+Removed 120 unused cells and 1605 unused wires.
+<suppressed ~125 debug messages>
+
+8.21.5. Finished fast OPT passes.
+
+8.22. Executing ABC pass (technology mapping using ABC).
+
+8.22.1. Extracting gate netlist of module `\activation_buffer' to `<abc-temp-dir>/input.blif'..
+
+8.22.1.1. Executed ABC.
+Extracted 25 gates and 39 wires to a netlist network with 12 inputs and 15 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Nov 15 2025 13:21:04)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library /tmp/yosys-abc-lWaIim/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.1.2. Re-integrating ABC results.
+ABC RESULTS:            ANDNOT cells:       12
+ABC RESULTS:               NOR cells:        2
+ABC RESULTS:                OR cells:       10
+ABC RESULTS:             ORNOT cells:        1
+ABC RESULTS:        internal signals:       12
+ABC RESULTS:           input signals:       12
+ABC RESULTS:          output signals:       15
+Removing temp directory.
+
+8.22.2. Extracting gate netlist of module `\controller_fsm' to `<abc-temp-dir>/input.blif'..
+
+8.22.2.1. Executed ABC.
+Extracted 17 gates and 24 wires to a netlist network with 7 inputs and 7 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Nov 15 2025 13:21:04)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library /tmp/yosys-abc-lWaIim/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.2.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:            ANDNOT cells:        3
+ABC RESULTS:              NAND cells:        1
+ABC RESULTS:               NOR cells:        1
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:                OR cells:        2
+ABC RESULTS:               XOR cells:        4
+ABC RESULTS:        internal signals:       10
+ABC RESULTS:           input signals:        7
+ABC RESULTS:          output signals:        7
+Removing temp directory.
+
+8.22.3. Extracting gate netlist of module `\relu' to `<abc-temp-dir>/input.blif'..
+
+8.22.3.1. Executed ABC.
+Extracted 96 gates and 122 wires to a netlist network with 24 inputs and 8 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Nov 15 2025 13:21:04)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library /tmp/yosys-abc-lWaIim/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.3.2. Re-integrating ABC results.
+ABC RESULTS:            ANDNOT cells:       28
+ABC RESULTS:              NAND cells:        4
+ABC RESULTS:               NOR cells:       18
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:                OR cells:       10
+ABC RESULTS:             ORNOT cells:        3
+ABC RESULTS:               XOR cells:        1
+ABC RESULTS:        internal signals:       90
+ABC RESULTS:           input signals:       24
+ABC RESULTS:          output signals:        8
+Removing temp directory.
+
+8.22.4. Extracting gate netlist of module `\systolic_array' to `<abc-temp-dir>/input.blif'..
+
+8.22.4.1. Executed ABC.
+Extracted 6592 gates and 6752 wires to a netlist network with 160 inputs and 76 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Nov 15 2025 13:21:04)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library /tmp/yosys-abc-lWaIim/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.4.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:      943
+ABC RESULTS:            ANDNOT cells:     1942
+ABC RESULTS:              NAND cells:      317
+ABC RESULTS:               NOR cells:      217
+ABC RESULTS:               NOT cells:      159
+ABC RESULTS:                OR cells:      661
+ABC RESULTS:             ORNOT cells:      268
+ABC RESULTS:              XNOR cells:      558
+ABC RESULTS:               XOR cells:     1686
+ABC RESULTS:        internal signals:     6516
+ABC RESULTS:           input signals:      160
+ABC RESULTS:          output signals:       76
+Removing temp directory.
+
+8.22.5. Extracting gate netlist of module `\top_tinyml' to `<abc-temp-dir>/input.blif'..
+Don't call ABC as there is nothing to map.
+
+8.22.5.1. Executed ABC.
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Removing temp directory.
+
+8.22.6. Extracting gate netlist of module `\weight_buffer' to `<abc-temp-dir>/input.blif'..
+
+8.22.6.1. Executed ABC.
+Extracted 61 gates and 68 wires to a netlist network with 6 inputs and 32 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Nov 15 2025 13:21:04)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library /tmp/yosys-abc-lWaIim/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.6.2. Re-integrating ABC results.
+ABC RESULTS:            ANDNOT cells:       17
+ABC RESULTS:              NAND cells:        2
+ABC RESULTS:                OR cells:       34
+ABC RESULTS:             ORNOT cells:        4
+ABC RESULTS:        internal signals:       30
+ABC RESULTS:           input signals:        6
+ABC RESULTS:          output signals:       32
+Removing temp directory.
+Removing global temp directory.
+
+8.23. Executing OPT pass (performing simple optimizations).
+
+8.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+8.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+<suppressed ~12 debug messages>
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 4 cells.
+
+8.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+Removed 0 unused cells and 1361 unused wires.
+<suppressed ~5 debug messages>
+
+8.23.5. Finished fast OPT passes.
+
+8.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `top_tinyml'. Setting top module to top_tinyml.
+
+8.24.1. Analyzing design hierarchy..
+Top module:  \top_tinyml
+Used module:     \activation_buffer
+Used module:     \controller_fsm
+Used module:     \relu
+Used module:     \systolic_array
+Used module:     \weight_buffer
+
+8.24.2. Analyzing design hierarchy..
+Top module:  \top_tinyml
+Used module:     \activation_buffer
+Used module:     \controller_fsm
+Used module:     \relu
+Used module:     \systolic_array
+Used module:     \weight_buffer
+Removed 0 unused modules.
+
+8.25. Printing statistics.
+
+=== activation_buffer ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       35 wires
+      102 wire bits
+       10 public wires
+       77 public wire bits
+        6 ports
+       45 port bits
+       57 cells
+       12   $_ANDNOT_
+        8   $_DFFE_PP_
+        2   $_NOR_
+        1   $_ORNOT_
+       10   $_OR_
+       24   $_SDFFCE_PN0P_
+
+=== controller_fsm ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       17 wires
+       32 wire bits
+        6 public wires
+       10 public wire bits
+        5 ports
+        5 port bits
+       21 cells
+        3   $_ANDNOT_
+        2   $_AND_
+        1   $_NAND_
+        1   $_NOR_
+        1   $_NOT_
+        2   $_OR_
+        5   $_SDFFE_PP0N_
+        2   $_SDFF_PP0_
+        4   $_XOR_
+
+=== relu ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       55 wires
+       85 wire bits
+        2 public wires
+       32 public wire bits
+        2 ports
+       32 port bits
+       61 cells
+       28   $_ANDNOT_
+        4   $_NAND_
+       15   $_NOR_
+        1   $_NOT_
+        3   $_ORNOT_
+        9   $_OR_
+        1   $_XOR_
+
+=== systolic_array ===
+
+        +----------Local Count, excluding submodules.
+        | 
+     6682 wires
+     6963 wire bits
+        7 public wires
+      288 public wire bits
+        3 ports
+      256 port bits
+     6751 cells
+     1942   $_ANDNOT_
+      943   $_AND_
+      317   $_NAND_
+      217   $_NOR_
+      159   $_NOT_
+      268   $_ORNOT_
+      661   $_OR_
+      558   $_XNOR_
+     1686   $_XOR_
+
+=== top_tinyml ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       12 wires
+      306 wire bits
+       12 public wires
+      306 public wire bits
+        9 ports
+       50 port bits
+        8 submodules
+        1   activation_buffer
+        1   controller_fsm
+        4   relu
+        1   systolic_array
+        1   weight_buffer
+
+=== weight_buffer ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       80 wires
+      360 wire bits
+       23 public wires
+      303 public wire bits
+        6 ports
+      143 port bits
+      185 cells
+       17   $_ANDNOT_
+        2   $_NAND_
+        4   $_ORNOT_
+       34   $_OR_
+      128   $_SDFFCE_PN0P_
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+     7258 top_tinyml
+       57 activation_buffer
+       21 controller_fsm
+       61 relu
+     6751 systolic_array
+      185 weight_buffer
+
+        +----------Count including submodules.
+        | 
+     7046 wires
+     8103 wire bits
+       66 public wires
+     1112 public wire bits
+       37 ports
+      627 port bits
+        - memories
+        - memory bits
+        - processes
+     7258 cells
+     2086   $_ANDNOT_
+      945   $_AND_
+        8   $_DFFE_PP_
+      336   $_NAND_
+      280   $_NOR_
+      164   $_NOT_
+      285   $_ORNOT_
+      743   $_OR_
+      152   $_SDFFCE_PN0P_
+        5   $_SDFFE_PP0N_
+        2   $_SDFF_PP0_
+      558   $_XNOR_
+     1694   $_XOR_
+        8 submodules
+        1   activation_buffer
+        1   controller_fsm
+        4   relu
+        1   systolic_array
+        1   weight_buffer
+
+8.26. Executing CHECK pass (checking for obvious problems).
+Checking module activation_buffer...
+Checking module controller_fsm...
+Checking module relu...
+Checking module systolic_array...
+Checking module top_tinyml...
+Checking module weight_buffer...
+Found and reported 0 problems.
+
+9. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell sky130_fd_sc_hd__dfxtp_1 (noninv, pins=3, area=20.02) is a direct match for cell type $_DFF_P_.
+  cell sky130_fd_sc_hd__dfrtn_1 (noninv, pins=4, area=25.02) is a direct match for cell type $_DFF_NN0_.
+  cell sky130_fd_sc_hd__dfrtp_1 (noninv, pins=4, area=25.02) is a direct match for cell type $_DFF_PN0_.
+  cell sky130_fd_sc_hd__dfstp_2 (noninv, pins=4, area=26.28) is a direct match for cell type $_DFF_PN1_.
+  cell sky130_fd_sc_hd__edfxtp_1 (noninv, pins=4, area=30.03) is a direct match for cell type $_DFFE_PP_.
+  cell sky130_fd_sc_hd__dfbbn_1 (noninv, pins=6, area=32.53) is a direct match for cell type $_DFFSR_NNN_.
+  cell sky130_fd_sc_hd__dfbbp_1 (noninv, pins=6, area=32.53) is a direct match for cell type $_DFFSR_PNN_.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \sky130_fd_sc_hd__dfxtp_1 _DFF_P_ (.CLK( C), .D( D), .Q( Q));
+    \sky130_fd_sc_hd__dfrtn_1 _DFF_NN0_ (.CLK_N( C), .D( D), .Q( Q), .RESET_B( R));
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    \sky130_fd_sc_hd__dfrtp_1 _DFF_PN0_ (.CLK( C), .D( D), .Q( Q), .RESET_B( R));
+    \sky130_fd_sc_hd__dfstp_2 _DFF_PN1_ (.CLK( C), .D( D), .Q( Q), .SET_B( R));
+    unmapped dff cell: $_DFF_PP0_
+    unmapped dff cell: $_DFF_PP1_
+    unmapped dff cell: $_DFFE_NN_
+    unmapped dff cell: $_DFFE_NP_
+    unmapped dff cell: $_DFFE_PN_
+    \sky130_fd_sc_hd__edfxtp_1 _DFFE_PP_ (.CLK( C), .D( D), .DE( E), .Q( Q));
+    \sky130_fd_sc_hd__dfbbn_1 _DFFSR_NNN_ (.CLK_N( C), .D( D), .Q( Q), .Q_N(~Q), .RESET_B( R), .SET_B( S));
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    \sky130_fd_sc_hd__dfbbp_1 _DFFSR_PNN_ (.CLK( C), .D( D), .Q( Q), .Q_N(~Q), .RESET_B( R), .SET_B( S));
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    unmapped dff cell: $_DFFSR_PPP_
+
+9.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+<suppressed ~24 debug messages>
+Mapping DFF cells in module `\activation_buffer':
+  mapped 32 $_DFFE_PP_ cells to \sky130_fd_sc_hd__edfxtp_1 cells.
+Mapping DFF cells in module `\controller_fsm':
+  mapped 7 $_DFF_P_ cells to \sky130_fd_sc_hd__dfxtp_1 cells.
+Mapping DFF cells in module `\relu':
+Mapping DFF cells in module `\systolic_array':
+Mapping DFF cells in module `\top_tinyml':
+Mapping DFF cells in module `\weight_buffer':
+  mapped 128 $_DFFE_PP_ cells to \sky130_fd_sc_hd__edfxtp_1 cells.
+
+10. Executing ABC pass (technology mapping using ABC).
+
+10.1. Extracting gate netlist of module `\activation_buffer' to `<abc-temp-dir>/input.blif'..
+
+10.1.1. Executed ABC.
+Extracted 49 gates and 62 wires to a netlist network with 12 inputs and 36 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Nov 15 2025 13:21:04)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /home/mohan123/pdk/volare/sky130/versions/0fe599b2afb6708d281543108caf8310912f54af/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.09 sec
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_12" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_3" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_6" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__diode_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_8".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__edfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__edfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_0".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_8".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_8".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_bleeder_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_12" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_3" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_6" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__lpflow_inputisolatch_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfsbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_4".
+ABC: Library "sky130_fd_sc_hd__tt_025C_1v80" from "/home/mohan123/pdk/volare/sky130/versions/0fe599b2afb6708d281543108caf8310912f54af/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib" has 334 cells (94 skipped: 63 seq; 13 tri-state; 18 no func; 0 dont_use; 0 with 2 outputs; 0 with 3+ outputs).  Time =     0.13 sec
+ABC: Memory =   19.85 MB. Time =     0.13 sec
+ABC: Warning: Detected 9 multi-output cells (for example, "sky130_fd_sc_hd__fa_1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+10.1.2. Re-integrating ABC results.
+ABC RESULTS:   sky130_fd_sc_hd__a21o_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a31o_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__and2_0 cells:       24
+ABC RESULTS:   sky130_fd_sc_hd__and3_1 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__lpflow_inputiso1p_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__lpflow_isobufsrc_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__nor4b_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nor4bb_1 cells:        1
+ABC RESULTS:        internal signals:       14
+ABC RESULTS:           input signals:       12
+ABC RESULTS:          output signals:       36
+Removing temp directory.
+
+10.2. Extracting gate netlist of module `\controller_fsm' to `<abc-temp-dir>/input.blif'..
+
+10.2.1. Executed ABC.
+Extracted 26 gates and 34 wires to a netlist network with 7 inputs and 7 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Nov 15 2025 13:21:04)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /home/mohan123/pdk/volare/sky130/versions/0fe599b2afb6708d281543108caf8310912f54af/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.15 sec
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_12" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_3" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_6" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__diode_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_8".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__edfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__edfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_0".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_8".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_8".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_bleeder_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_12" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_3" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_6" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__lpflow_inputisolatch_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfsbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_4".
+ABC: Library "sky130_fd_sc_hd__tt_025C_1v80" from "/home/mohan123/pdk/volare/sky130/versions/0fe599b2afb6708d281543108caf8310912f54af/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib" has 334 cells (94 skipped: 63 seq; 13 tri-state; 18 no func; 0 dont_use; 0 with 2 outputs; 0 with 3+ outputs).  Time =     0.19 sec
+ABC: Memory =   19.85 MB. Time =     0.19 sec
+ABC: Warning: Detected 9 multi-output cells (for example, "sky130_fd_sc_hd__fa_1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+10.2.2. Re-integrating ABC results.
+ABC RESULTS:   sky130_fd_sc_hd__a21boi_0 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a21oi_1 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__a31oi_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__and3b_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__clkinv_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__lpflow_isobufsrc_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nand3_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nor2_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nor3_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__nor4_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nor4bb_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o21ai_0 cells:        2
+ABC RESULTS:        internal signals:       20
+ABC RESULTS:           input signals:        7
+ABC RESULTS:          output signals:        7
+Removing temp directory.
+
+10.3. Extracting gate netlist of module `\relu' to `<abc-temp-dir>/input.blif'..
+
+10.3.1. Executed ABC.
+Extracted 61 gates and 85 wires to a netlist network with 24 inputs and 8 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Nov 15 2025 13:21:04)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /home/mohan123/pdk/volare/sky130/versions/0fe599b2afb6708d281543108caf8310912f54af/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.12 sec
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_12" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_3" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_6" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__diode_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_8".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__edfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__edfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_0".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_8".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_8".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_bleeder_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_12" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_3" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_6" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__lpflow_inputisolatch_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfsbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_4".
+ABC: Library "sky130_fd_sc_hd__tt_025C_1v80" from "/home/mohan123/pdk/volare/sky130/versions/0fe599b2afb6708d281543108caf8310912f54af/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib" has 334 cells (94 skipped: 63 seq; 13 tri-state; 18 no func; 0 dont_use; 0 with 2 outputs; 0 with 3+ outputs).  Time =     0.16 sec
+ABC: Memory =   19.85 MB. Time =     0.16 sec
+ABC: Warning: Detected 9 multi-output cells (for example, "sky130_fd_sc_hd__fa_1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+10.3.2. Re-integrating ABC results.
+ABC RESULTS:   sky130_fd_sc_hd__a31oi_1 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__clkinv_1 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__nor3_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nor4_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__or3_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__or4_1 cells:        2
+ABC RESULTS:        internal signals:       53
+ABC RESULTS:           input signals:       24
+ABC RESULTS:          output signals:        8
+Removing temp directory.
+
+10.4. Extracting gate netlist of module `\systolic_array' to `<abc-temp-dir>/input.blif'..
+
+10.4.1. Executed ABC.
+Extracted 6751 gates and 6911 wires to a netlist network with 160 inputs and 76 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Nov 15 2025 13:21:04)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /home/mohan123/pdk/volare/sky130/versions/0fe599b2afb6708d281543108caf8310912f54af/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.10 sec
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_12" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_3" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_6" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__diode_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_8".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__edfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__edfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_0".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_8".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_8".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_bleeder_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_12" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_3" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_6" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__lpflow_inputisolatch_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfsbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_4".
+ABC: Library "sky130_fd_sc_hd__tt_025C_1v80" from "/home/mohan123/pdk/volare/sky130/versions/0fe599b2afb6708d281543108caf8310912f54af/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib" has 334 cells (94 skipped: 63 seq; 13 tri-state; 18 no func; 0 dont_use; 0 with 2 outputs; 0 with 3+ outputs).  Time =     0.13 sec
+ABC: Memory =   19.85 MB. Time =     0.13 sec
+ABC: Warning: Detected 9 multi-output cells (for example, "sky130_fd_sc_hd__fa_1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+10.4.2. Re-integrating ABC results.
+ABC RESULTS:          _const0_ cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__a211o_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a211oi_1 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__a21boi_0 cells:        9
+ABC RESULTS:   sky130_fd_sc_hd__a21o_1 cells:       18
+ABC RESULTS:   sky130_fd_sc_hd__a21oi_1 cells:      118
+ABC RESULTS:   sky130_fd_sc_hd__a22o_1 cells:       54
+ABC RESULTS:   sky130_fd_sc_hd__a22oi_1 cells:       44
+ABC RESULTS:   sky130_fd_sc_hd__a2bb2oi_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__a311oi_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__a31o_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__a31oi_1 cells:       19
+ABC RESULTS:   sky130_fd_sc_hd__a32oi_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a41oi_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__and2_0 cells:      128
+ABC RESULTS:   sky130_fd_sc_hd__and3_1 cells:       11
+ABC RESULTS:   sky130_fd_sc_hd__and3b_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__and4_1 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__clkinv_1 cells:       85
+ABC RESULTS:   sky130_fd_sc_hd__lpflow_inputiso1p_1 cells:       18
+ABC RESULTS:   sky130_fd_sc_hd__lpflow_isobufsrc_1 cells:       93
+ABC RESULTS:   sky130_fd_sc_hd__maj3_1 cells:      658
+ABC RESULTS:   sky130_fd_sc_hd__mux2i_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__nand2_1 cells:      923
+ABC RESULTS:   sky130_fd_sc_hd__nand2b_1 cells:       48
+ABC RESULTS:   sky130_fd_sc_hd__nand3_1 cells:       58
+ABC RESULTS:   sky130_fd_sc_hd__nand3b_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nand4_1 cells:       79
+ABC RESULTS:   sky130_fd_sc_hd__nor2_1 cells:      223
+ABC RESULTS:   sky130_fd_sc_hd__nor2b_1 cells:       32
+ABC RESULTS:   sky130_fd_sc_hd__nor3_1 cells:       26
+ABC RESULTS:   sky130_fd_sc_hd__nor3b_1 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__nor4_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__nor4b_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__o2111ai_1 cells:        6
+ABC RESULTS:   sky130_fd_sc_hd__o211ai_1 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__o21a_1 cells:       19
+ABC RESULTS:   sky130_fd_sc_hd__o21ai_0 cells:       72
+ABC RESULTS:   sky130_fd_sc_hd__o21ba_1 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__o21bai_1 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__o22a_1 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__o22ai_1 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__o311ai_0 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__o31a_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o31ai_1 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__o32a_1 cells:        6
+ABC RESULTS:   sky130_fd_sc_hd__o32ai_1 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__o41ai_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__or3_1 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__or3b_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__or4_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__xnor2_1 cells:      644
+ABC RESULTS:   sky130_fd_sc_hd__xnor3_1 cells:      239
+ABC RESULTS:   sky130_fd_sc_hd__xor2_1 cells:      344
+ABC RESULTS:   sky130_fd_sc_hd__xor3_1 cells:      299
+ABC RESULTS:        internal signals:     6675
+ABC RESULTS:           input signals:      160
+ABC RESULTS:          output signals:       76
+Removing temp directory.
+
+10.5. Extracting gate netlist of module `\top_tinyml' to `<abc-temp-dir>/input.blif'..
+Don't call ABC as there is nothing to map.
+
+10.5.1. Executed ABC.
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Removing temp directory.
+
+10.6. Extracting gate netlist of module `\weight_buffer' to `<abc-temp-dir>/input.blif'..
+
+10.6.1. Executed ABC.
+Extracted 185 gates and 200 wires to a netlist network with 14 inputs and 144 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Nov 15 2025 13:21:04)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /home/mohan123/pdk/volare/sky130/versions/0fe599b2afb6708d281543108caf8310912f54af/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.11 sec
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_12" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_3" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_6" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__diode_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_8".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__edfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__edfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_0".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_8".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_8".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_bleeder_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_12" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_3" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_6" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__lpflow_inputisolatch_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfsbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_4".
+ABC: Library "sky130_fd_sc_hd__tt_025C_1v80" from "/home/mohan123/pdk/volare/sky130/versions/0fe599b2afb6708d281543108caf8310912f54af/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib" has 334 cells (94 skipped: 63 seq; 13 tri-state; 18 no func; 0 dont_use; 0 with 2 outputs; 0 with 3+ outputs).  Time =     0.14 sec
+ABC: Memory =   19.85 MB. Time =     0.14 sec
+ABC: Warning: Detected 9 multi-output cells (for example, "sky130_fd_sc_hd__fa_1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+10.6.2. Re-integrating ABC results.
+ABC RESULTS:   sky130_fd_sc_hd__clkinv_1 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__lpflow_inputiso1p_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nand2_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nand2b_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__nand4b_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nand4bb_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__nor3_1 cells:      128
+ABC RESULTS:   sky130_fd_sc_hd__o21bai_1 cells:       16
+ABC RESULTS:   sky130_fd_sc_hd__or4b_1 cells:        1
+ABC RESULTS:        internal signals:       42
+ABC RESULTS:           input signals:       14
+ABC RESULTS:          output signals:      144
+Removing temp directory.
+Removing global temp directory.
+
+11. Executing OPT pass (performing simple optimizations).
+
+11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+11.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \activation_buffer..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \controller_fsm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \relu..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \systolic_array..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_tinyml..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \weight_buffer..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+11.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \activation_buffer.
+  Optimizing cells in module \controller_fsm.
+  Optimizing cells in module \relu.
+  Optimizing cells in module \systolic_array.
+  Optimizing cells in module \top_tinyml.
+  Optimizing cells in module \weight_buffer.
+Performed a total of 0 changes.
+
+11.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+11.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+Removed 0 unused cells and 7286 unused wires.
+<suppressed ~5 debug messages>
+
+11.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+11.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+11.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \activation_buffer..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \controller_fsm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \relu..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \systolic_array..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_tinyml..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \weight_buffer..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+11.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \activation_buffer.
+  Optimizing cells in module \controller_fsm.
+  Optimizing cells in module \relu.
+  Optimizing cells in module \systolic_array.
+  Optimizing cells in module \top_tinyml.
+  Optimizing cells in module \weight_buffer.
+Performed a total of 0 changes.
+
+11.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\activation_buffer'.
+Finding identical cells in module `\controller_fsm'.
+Finding identical cells in module `\relu'.
+Finding identical cells in module `\systolic_array'.
+Finding identical cells in module `\top_tinyml'.
+Finding identical cells in module `\weight_buffer'.
+Removed a total of 0 cells.
+
+11.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \activation_buffer..
+Finding unused cells or wires in module \controller_fsm..
+Finding unused cells or wires in module \relu..
+Finding unused cells or wires in module \systolic_array..
+Finding unused cells or wires in module \top_tinyml..
+Finding unused cells or wires in module \weight_buffer..
+
+11.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module activation_buffer.
+Optimizing module controller_fsm.
+Optimizing module relu.
+Optimizing module systolic_array.
+Optimizing module top_tinyml.
+Optimizing module weight_buffer.
+
+11.16. Finished fast OPT passes. (There is nothing left to do.)
+
+12. Executing FLATTEN pass (flatten design).
+Deleting now unused module activation_buffer.
+Deleting now unused module controller_fsm.
+Deleting now unused module relu.
+Deleting now unused module systolic_array.
+Deleting now unused module weight_buffer.
+<suppressed ~8 debug messages>
+
+13. Executing Verilog backend.
+
+13.1. Executing BMUXMAP pass.
+
+13.2. Executing DEMUXMAP pass.
+Dumping module `\top_tinyml'.
+
+14. Printing statistics.
+
+=== top_tinyml ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+     4626        - wires
+     5672        - wire bits
+       66        - public wires
+     1112        - public wire bits
+        9        - ports
+       50        - port bits
+     4839  4.5E+04 cells
+        8        -   $scopeinfo
+        1    8.758   sky130_fd_sc_hd__a211o_1
+        3   22.522   sky130_fd_sc_hd__a211oi_1
+       10   75.072   sky130_fd_sc_hd__a21boi_0
+       19  142.637   sky130_fd_sc_hd__a21o_1
+      121  605.581   sky130_fd_sc_hd__a21oi_1
+       54  472.954   sky130_fd_sc_hd__a22o_1
+       44  330.317   sky130_fd_sc_hd__a22oi_1
+        4   35.034   sky130_fd_sc_hd__a2bb2oi_1
+        2   17.517   sky130_fd_sc_hd__a311oi_1
+        5   43.792   sky130_fd_sc_hd__a31o_1
+       52  325.312   sky130_fd_sc_hd__a31oi_1
+        1    8.758   sky130_fd_sc_hd__a32oi_1
+        1    8.758   sky130_fd_sc_hd__a41oi_1
+      152  950.912   sky130_fd_sc_hd__and2_0
+       19  118.864   sky130_fd_sc_hd__and3_1
+        5   43.792   sky130_fd_sc_hd__and3b_1
+        5   43.792   sky130_fd_sc_hd__and4_1
+      126  472.954   sky130_fd_sc_hd__clkinv_1
+        7  140.134   sky130_fd_sc_hd__dfxtp_1
+      160  4.8E+03   sky130_fd_sc_hd__edfxtp_1
+       21  131.376   sky130_fd_sc_hd__lpflow_inputiso1p_1
+       96  600.576   sky130_fd_sc_hd__lpflow_isobufsrc_1
+      658 6.59E+03   sky130_fd_sc_hd__maj3_1
+        4   40.038   sky130_fd_sc_hd__mux2i_1
+      924 3.47E+03   sky130_fd_sc_hd__nand2_1
+       50    312.8   sky130_fd_sc_hd__nand2b_1
+       59  295.283   sky130_fd_sc_hd__nand3_1
+        1    7.507   sky130_fd_sc_hd__nand3b_1
+       79  494.224   sky130_fd_sc_hd__nand4_1
+        1    8.758   sky130_fd_sc_hd__nand4b_1
+        2   22.522   sky130_fd_sc_hd__nand4bb_1
+      224  840.806   sky130_fd_sc_hd__nor2_1
+       32  200.192   sky130_fd_sc_hd__nor2b_1
+      160  800.768   sky130_fd_sc_hd__nor3_1
+        7    52.55   sky130_fd_sc_hd__nor3b_1
+        9   56.304   sky130_fd_sc_hd__nor4_1
+        5   43.792   sky130_fd_sc_hd__nor4b_1
+        2   20.019   sky130_fd_sc_hd__nor4bb_1
+        6    52.55   sky130_fd_sc_hd__o2111ai_1
+        7    52.55   sky130_fd_sc_hd__o211ai_1
+       19  142.637   sky130_fd_sc_hd__o21a_1
+       74  370.355   sky130_fd_sc_hd__o21ai_0
+        3   30.029   sky130_fd_sc_hd__o21ba_1
+       19  142.637   sky130_fd_sc_hd__o21bai_1
+        3   26.275   sky130_fd_sc_hd__o22a_1
+        7   43.792   sky130_fd_sc_hd__o22ai_1
+        2   17.517   sky130_fd_sc_hd__o311ai_0
+        1    8.758   sky130_fd_sc_hd__o31a_1
+        5   37.536   sky130_fd_sc_hd__o31ai_1
+        6   60.058   sky130_fd_sc_hd__o32a_1
+        3   26.275   sky130_fd_sc_hd__o32ai_1
+        2   17.517   sky130_fd_sc_hd__o41ai_1
+       12   75.072   sky130_fd_sc_hd__or3_1
+        1    8.758   sky130_fd_sc_hd__or3b_1
+        9   67.565   sky130_fd_sc_hd__or4_1
+        1    10.01   sky130_fd_sc_hd__or4b_1
+      644  5640.41   sky130_fd_sc_hd__xnor2_1
+      239 5.38E+03   sky130_fd_sc_hd__xnor3_1
+      344  3012.89   sky130_fd_sc_hd__xor2_1
+      299 7.11E+03   sky130_fd_sc_hd__xor3_1
+
+   Area for cell type $scopeinfo is unknown!
+
+   Chip area for module '\top_tinyml': 44988.147200
+     of which used for sequential elements: 4944.742400 (10.99%)
+
+End of script. Logfile hash: d6953c0a23, CPU: user 2.69s system 0.31s, MEM: 59.38 MB peak
+Yosys 0.58 (git sha1 157aabb58, g++ 11.4.0-1ubuntu1~22.04.2 -fPIC -O3)
+Time spent: 54% 2x abc (2 sec), 9% 26x opt_clean (0 sec), ...
